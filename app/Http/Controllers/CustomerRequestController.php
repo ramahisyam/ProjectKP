@@ -8,7 +8,7 @@ use App\Models\Service;
 
 class CustomerRequestController extends Controller
 {
-    public function index() {
+    public function create() {
         $services = Service::all();
 
         return view('customer-request.add', compact('services'));
@@ -16,12 +16,12 @@ class CustomerRequestController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'name' => 'required',
-            'phoneNumber' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'address' => 'required',
-            'service_id' => 'required'
+            'name' => 'required|max:30',
+            'phoneNumber' => 'required|digits_between:1,13',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'address' => 'required|max:255',
+            'service_id' => 'required|exists:services,id'
         ]);
         $customerRequest = CustomerRequest::create([
             'name' => $request->name,
@@ -33,9 +33,13 @@ class CustomerRequestController extends Controller
         ]);
 
         if ($customerRequest) {
-            return redirect()->route('customer.index')->with(['success' => 'Data Berhasil Disimpan']);
+            return redirect()->route('customer.create')->with(['success' => 'Data Berhasil Disimpan']);
         }else {
-            return redirect()->route('customer.index')->with(['error' => 'Data Gagal Disimpan']);
+            return redirect()->route('customer.create')->with(['error' => 'Data Gagal Disimpan']);
         }
+    }
+
+    public function index() {
+        dd('cooming soon');
     }
 }

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BackroomSeeder::class,
             ServiceSeeder::class,
-            CustomerRequest::class
+            CustomerRequestSeeder::class
         ]);
     }
 }
