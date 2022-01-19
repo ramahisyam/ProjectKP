@@ -19,10 +19,11 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>12345qwerty</td>
-      <td>PT XL Axiata Tbk</td>
-      <td>Astinet</td>
+      @forelse ($blogs as $blog)
+      <th scope="row">{{ $blog->id }}</th>
+      <td>{{ $blog->image }}</td>
+      <td>{{ $blog->title }}</td>
+      <td>{{ $blog->content }}</td>
       <td>100 Mbps</td>
       <td>13-01-2022</td>
       <td>-6.232140225008921, 106.83176014567648</td>
@@ -87,57 +88,46 @@
           </div>
       </td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>MNI.OAM_RECTIFIER_1.GIN024.1637730508752</td>
-      <td>PT Indosat Tbk</td>
-      <td>NeuCentrIX</td>
-      <td>100 Mbps</td>
-      <td>14-01-2022</td>
-      <td>-6.180163694701556, 106.8214288972833</td>
-      <td>Jl. Medan Merdeka Barat No. 21 (Jln Budi Kemulyaan), Jakarta Pusat, Jakarta 10110, Indonesia </td>
-      <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal2">Details</button>
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >         
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Details</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              WITEL 3
-              <br>
-              Status  : <span class="badge rounded-pill bg-success">OK</span>
-              <br>
-              Notes   : --
-              <hr>
+    
+    
 
-              WITEL 4
-              <br>
-              Status  : <span class="badge rounded-pill bg-danger">NOT OK</span>
-              <br>
-              Notes   : Lakukan pemeriksaan kembali atas hasil integrasi network terminal (ONT/L2SW atau NTE lainnya) dengan NE Customer untuk memastikan data atau attachment pendukung telah dipenuhi. Lengkapi variable dan atau attachment pendukung yang dibutuhkan              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-            </div>
-          </div>
-        </div>
+    <h1></h1>
+
+    @empty
+
+    <div class="alert alert-danger">
+      Data Blog belum Tersedia.
+    </div>
+
+    @endforelse
+
+    <script>
+      //message with toastr
+      @if(session()->has('success'))
+            
+         toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+    
+      @elseif(session()->has('error'))
+    
+         toastr.error('{{ session('error') }}', 'GAGAL!'); 
+                
+      @endif
+    </script>
+    {{-- <!-- Start kode untuk form pencarian -->
+    <form class="form" method="get" action="{{ route('search') }}">
+      <div class="form-group w-100 mb-3">
+          <label for="search" class="d-block mr-2">Pencarian</label>
+          <input type="text" name="search" class="form-control w-75 d-inline" id="search" placeholder="Masukkan keyword">
+          <button type="submit" class="btn btn-primary mb-1">Cari</button>
       </div>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>MNI.4G_L2100_10_MHz.DPR068.1613224255962</td>
-      <td>PT Smartfren Telecom Tbk</td>
-      <td>Link</td>
-      <td>100 Mbps</td>
-      <td>14-01-2022</td>
-      <td>-6.184785661905374, 106.82481320082263</td>
-      <td>Jl. H. Agus Salim No.32, RT.2/RW.1, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10340</td>
-      <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal1">Details</button></td>
-    </tr>
+    </form>
+    <!-- Start kode untuk form pencarian -->
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+      <p>{{ $message }}</p>
+    </div>
+    @endif --}}
+
   </tbody>
 </table>
 </div>
