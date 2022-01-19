@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CustomerRequest;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             BackroomSeeder::class,
-            ServiceSeeder::class
+            ServiceSeeder::class,
+            CustomerRequest::class
         ]);
     }
 }

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Witel8 extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }
