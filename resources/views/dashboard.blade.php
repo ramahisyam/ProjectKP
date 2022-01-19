@@ -11,23 +11,23 @@
       <th scope="col">Customer</th>
       <th scope="col">Service</th>
       <th scope="col">Bandwith</th>
-      <th scope="col">Dates</th>
-      <th scope="col">Long Lat</th>
+      <th scope="col">Date and Time</th>
+      <th scope="col">Latitude, Longitude</th>
       <th scope="col">Address</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      @forelse ($blogs as $blog)
-      <th scope="row">{{ $blog->id }}</th>
-      <td>{{ $blog->image }}</td>
-      <td>{{ $blog->title }}</td>
-      <td>{{ $blog->content }}</td>
-      <td>100 Mbps</td>
-      <td>13-01-2022</td>
-      <td>-6.232140225008921, 106.83176014567648</td>
-      <td>JL. H. R. Rasuna Said X5 Kav. 11-12 Kuningan Timur, Setiabudi, Jakarta Selatan 12950 – Indonesia</td>
+      @forelse ($services as $service)
+      <th scope="row">{{ $service->id }}</th>
+      <td>bussinessKeyExample</td>
+      <td>{{ $service->name }}</td>
+      <td>{{ $service->service->name }}</td>
+      <td>bandwithExample</td>
+      <td>{{$service->created_at}}</td>
+      <td>{{$service->latitude}}, {{$service->longitude}}</td>
+      <td>{{$service->address}}</td>
       <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal1">Details</button>
           <!-- Modal -->
           <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >         
@@ -40,9 +40,9 @@
                 <div class="modal-body">
                   WITEL 1
                   <br>
-                  Status  : <span class="badge rounded-pill bg-success">OK</span>
+                  Status  : <span class="badge rounded-pill bg-secondary">WAITING RESPONSE</span>
                   <br>
-                  Notes   : --
+                  Notes   : Notes will be displayed here.
                   <hr>
 
                   WITEL 2
@@ -96,7 +96,7 @@
     @empty
 
     <div class="alert alert-danger">
-      Data Blog belum Tersedia.
+      Data belum tersedia.
     </div>
 
     @endforelse

@@ -1,5 +1,6 @@
 <?php
 
+//use App\Http\Controllers\CustomerRequestController;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\BlogController;
 
@@ -29,3 +30,7 @@ Route::resource('dashboard', BlogController::class);
 
 //Route search
 //Route::get('/search', [BlogController::class, 'search'])->name('search');
+Route::resource('customer', CustomerRequestController::class);
+
+//Route::resource('dashboard', CustomerRequestController::class);
+
