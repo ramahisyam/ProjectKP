@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CustomerRequestController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,11 +15,18 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('layouts.app');
-// });
+Route::get('/', function () {
+    return view('layouts.app');
+});
+
 Route::resource('customer', CustomerRequestController::class);
 
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/customer', function(){
+    return redirect('/');
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -17,6 +17,7 @@ class CustomerRequestController extends Controller
         $services = Service::all();
 
         return view('customer-request.add', compact('services'));
+
     }
 
     public function store(Request $request) {
@@ -43,8 +44,5 @@ class CustomerRequestController extends Controller
             return redirect()->route('customer.create')->with(['error' => 'Data Gagal Disimpan']);
         }
     }
-
-    public function index() {
-        dd('cooming soon');
-    }
+    
 }

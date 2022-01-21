@@ -76,10 +76,11 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    </header>
+    <main>
+        @yield('content')
+    </main>
+    
+    <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"> </script>
 </body>
 </html>
