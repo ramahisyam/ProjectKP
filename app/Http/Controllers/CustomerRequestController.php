@@ -8,27 +8,26 @@ use App\Models\Service;
 
 class CustomerRequestController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create() {
         $services = Service::all();
 
         return view('customer-request.add', compact('services'));
 
-        //return view('dashboard', compact('services'));
-
-        // $blogs = Service::latest()->paginate(10);
-        // return view('dashboard', compact('blogs'));
-
-        
     }
 
     public function store(Request $request) {
         $this->validate($request, [
-            'name' => 'required',
-            'phoneNumber' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'address' => 'required',
-            'service_id' => 'required'
+            'name' => 'required|max:30',
+            'phoneNumber' => 'required|digits_between:1,13',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'address' => 'required|max:255',
+            'service_id' => 'required|exists:services,id'
         ]);
         $customerRequest = CustomerRequest::create([
             'name' => $request->name,
@@ -45,24 +44,5 @@ class CustomerRequestController extends Controller
             return redirect()->route('customer.create')->with(['error' => 'Data Gagal Disimpan']);
         }
     }
-
-    public function index() {
-        $services = CustomerRequest::latest()->paginate(10);
-        return view('dashboard', compact('services'));
-    }
-    // public function cari(Request $request)
-	// {
-	// 	// menangkap data pencarian
-	// 	$cari = $request->cari;
- 
-    // 		// mengambil data dari table pegawai sesuai pencarian data
-	// 	$services = CustomerRequest::table('services')
-	// 	->where('name','like',"%".$cari."%")
-	// 	->paginate();
- 
-    // 		// mengirim data pegawai ke view index
-	// 	return view('index',['services' => $services]);
- 
-	// }
-
+    
 }

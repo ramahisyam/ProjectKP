@@ -2,16 +2,11 @@
 
 @section('content')
 <div class="container">
-<table class="table ">
+<table class="table table-bordered">
   <thead>
     <br>
-    {{-- <p>Cari Data Pegawai :</p> --}}
-    {{-- <form action="/customer/cari" method="GET">
-      <input type="text" name="cari" placeholder="..." value="{{ old('cari') }}">
-      <input type="submit" value="SEARCH">
-    </form> --}}
-    
     <tr>
+      {{-- start of column --}}
       <th scope="col">No.</th>
       <th scope="col">Business Key</th>
       <th scope="col">Customer</th>
@@ -21,20 +16,18 @@
       <th scope="col">Latitude, Longitude</th>
       <th scope="col">Address</th>
       <th scope="col">Action</th>
+      {{-- end of column --}}
     </tr>
   </thead>
   <tbody>
-    
-     
     <tr>
       <?php $no=1;?>
       @forelse ($services as $index=>$service)
       <th scope="row"> {{ $index + $services->firstItem() }} </th>
-      {{-- {{ $articles->count() * ($articles->currentPage() - 1) + $loop->iteration }} --}}
-      <td>MNI.4G_L2100_10_MHz.GIN114.1623318482865</td>
+      <td>MNI.4G_L2100_10_MHz.GIN114.1623318482865</td> {{-- businessKeyExample --}}
       <td>{{ $service->name }}</td>
       <td>{{ $service->service->name }}</td>
-      <td>123 MBps</td>
+      <td>123 MBps</td> {{-- bandwithExample --}}
       <td>{{$service->created_at}}</td>
       <td>{{$service->latitude}}, {{$service->longitude}}</td>
       <td>{{$service->address}}</td>
@@ -96,25 +89,20 @@
               </div>
             </div>
           </div>
+          {{-- end of modal --}}
       </td>
       <?php $no++ ;?>
+     
     </tr>
-    
-    
-
-    <h1></h1>
 
     @empty
-
+    {{-- if empty or data not exist --}}
     <div class="alert alert-danger">
       Data belum tersedia.
     </div>
     
-
     @endforelse
     
-            {{-- @endforeach --}}
-
     <script>
       //message with toastr
       @if(session()->has('success'))
@@ -127,34 +115,14 @@
                 
       @endif
     </script>
-    {{-- <!-- Start kode untuk form pencarian -->
-    <form class="form" method="get" action="{{ route('search') }}">
-      <div class="form-group w-100 mb-3">
-          <label for="search" class="d-block mr-2">Pencarian</label>
-          <input type="text" name="search" class="form-control w-75 d-inline" id="search" placeholder="Masukkan keyword">
-          <button type="submit" class="btn btn-primary mb-1">Cari</button>
-      </div>
-    </form>
-    <!-- Start kode untuk form pencarian -->
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-      <p>{{ $message }}</p>
-    </div>
-    @endif --}}
 
   </tbody>
 </table>
-{{-- perhatikan script di bawah ini untuk membuat paginasi dan yang berkaitan dengan paginasi 
-Current Page: {{ $services->currentPage() }}<br>
-Jumlah Data: {{ $services->total() }}<br>
-Data perhalaman: {{ $services->perPage() }}<br>
-<br> --}}
 
+{{-- pagination --}}
 {{ $services->links() }}
 Showing {{$services->firstItem()}} to {{$services->lastItem()}} of {{$services->total()}} entries
-{{-- {{$services->onFirstPage()}} --}}
+
 </div>
-
-
 
 @endsection
