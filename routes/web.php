@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Auth;
 //     return view('layouts.app');
 // });
 Route::resource('customer', CustomerRequestController::class);
+Route::get('/customer', function(){
+    return redirect()->route('home');
+});
 
 Auth::routes();
 

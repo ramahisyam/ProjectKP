@@ -45,6 +45,6 @@ class CustomerRequestController extends Controller
     }
 
     public function index() {
-        dd('cooming soon');
+        // dd('cooming soon');
     }
 }
