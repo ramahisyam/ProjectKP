@@ -2,8 +2,14 @@
 
 @section('content')
 <div class="container">
-<table class="table table-bordered">
+<table class="table ">
   <thead>
+    <br>
+    {{-- <p>Cari Data Pegawai :</p> --}}
+    {{-- <form action="/customer/cari" method="GET">
+      <input type="text" name="cari" placeholder="..." value="{{ old('cari') }}">
+      <input type="submit" value="SEARCH">
+    </form> --}}
     
     <tr>
       <th scope="col">No.</th>
@@ -18,13 +24,17 @@
     </tr>
   </thead>
   <tbody>
+    
+     
     <tr>
-      @forelse ($services as $service)
-      <th scope="row">{{ $service->id }}</th>
-      <td>bussinessKeyExample</td>
+      <?php $no=1;?>
+      @forelse ($services as $index=>$service)
+      <th scope="row"> {{ $index + $services->firstItem() }} </th>
+      {{-- {{ $articles->count() * ($articles->currentPage() - 1) + $loop->iteration }} --}}
+      <td>MNI.4G_L2100_10_MHz.GIN114.1623318482865</td>
       <td>{{ $service->name }}</td>
       <td>{{ $service->service->name }}</td>
-      <td>bandwithExample</td>
+      <td>123 MBps</td>
       <td>{{$service->created_at}}</td>
       <td>{{$service->latitude}}, {{$service->longitude}}</td>
       <td>{{$service->address}}</td>
@@ -87,6 +97,7 @@
             </div>
           </div>
       </td>
+      <?php $no++ ;?>
     </tr>
     
     
@@ -98,8 +109,11 @@
     <div class="alert alert-danger">
       Data belum tersedia.
     </div>
+    
 
     @endforelse
+    
+            {{-- @endforeach --}}
 
     <script>
       //message with toastr
@@ -130,6 +144,15 @@
 
   </tbody>
 </table>
+{{-- perhatikan script di bawah ini untuk membuat paginasi dan yang berkaitan dengan paginasi 
+Current Page: {{ $services->currentPage() }}<br>
+Jumlah Data: {{ $services->total() }}<br>
+Data perhalaman: {{ $services->perPage() }}<br>
+<br> --}}
+
+{{ $services->links() }}
+Showing {{$services->firstItem()}} to {{$services->lastItem()}} of {{$services->total()}} entries
+{{-- {{$services->onFirstPage()}} --}}
 </div>
 
 

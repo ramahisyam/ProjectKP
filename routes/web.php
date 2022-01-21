@@ -32,5 +32,13 @@ Route::resource('dashboard', BlogController::class);
 //Route::get('/search', [BlogController::class, 'search'])->name('search');
 Route::resource('customer', CustomerRequestController::class);
 
+// Route::get('/customer','CustomerRequestController@index');
+// Route::get('/customer/cari{$cari}','CustomerRequestController@cari');
+
+// Route::get('/', function () {
+// 	$services = Service::paginate(5);
+//     return view('dashboard', compact('services'));
+// });
+
 //Route::resource('dashboard', CustomerRequestController::class);
 

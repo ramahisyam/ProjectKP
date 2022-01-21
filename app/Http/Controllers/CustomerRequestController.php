@@ -50,4 +50,19 @@ class CustomerRequestController extends Controller
         $services = CustomerRequest::latest()->paginate(10);
         return view('dashboard', compact('services'));
     }
+    // public function cari(Request $request)
+	// {
+	// 	// menangkap data pencarian
+	// 	$cari = $request->cari;
+ 
+    // 		// mengambil data dari table pegawai sesuai pencarian data
+	// 	$services = CustomerRequest::table('services')
+	// 	->where('name','like',"%".$cari."%")
+	// 	->paginate();
+ 
+    // 		// mengirim data pegawai ke view index
+	// 	return view('index',['services' => $services]);
+ 
+	// }
+
 }
