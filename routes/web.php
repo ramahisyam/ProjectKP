@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
-});
-
 Route::resource('customer', CustomerRequestController::class);
 
 Auth::routes();
@@ -28,5 +24,3 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/customer', function(){
     return redirect('/');
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
