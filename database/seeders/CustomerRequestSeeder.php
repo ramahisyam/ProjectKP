@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\CustomerRequest;
+use App\Models\Service;
+use App\Models\BackroomStatus;
 
 class CustomerRequestSeeder extends Seeder
 {
@@ -15,31 +18,24 @@ class CustomerRequestSeeder extends Seeder
      */
     public function run()
     {
-        $customerRequests = [
-            [
-                'name' => 'Rama Hisyam',
-                'phoneNumber' => '083808380838',
-                'latitude' => '104.087245',
-                'longitude' => '-44.387412',
-                'address' => 'Jl. Kenjeran',
-                'service_id' => 1,
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'name' => 'Hisyam Alchoiri',
-                'phoneNumber' => '083808420838',
-                'latitude' => '104.089485',
-                'longitude' => '34.387412',
-                'address' => 'Jl. Suramadu',
-                'service_id' => 2,
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]
-        ];
+        $customerRequest = CustomerRequest::create([
+            'name' => 'Rama',
+            'phoneNumber' => '083808380225',
+            'latitude' => '34.246425',
+            'longitude' => '-24.365335',
+            'address' => 'Jl. Kenjeran',
+            'service_id' => 2
+        ]);
 
-        foreach ($customerRequests as $customerRequest) {
-            DB::table('customer_requests')->insert($customerRequest);
+        $customers = $customerRequest->service->backrooms;
+
+        foreach ($customers as $customer) {
+            BackroomStatus::create([
+                'customer_request_id' => $customerRequest->id,
+                'backroom_id' => $customer->id,
+                'status' => 'Waiting to Process',
+                'information' => 'No info'
+            ]);
         }
     }
 }
