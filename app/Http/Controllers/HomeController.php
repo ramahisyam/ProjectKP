@@ -24,11 +24,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    
+
     public function index()
     {
         $customers = CustomerRequest::latest()->with('service.backrooms.status')->paginate(10);
-        // $customerRequests = CustomerRequest::all();
-        // dd($customers);
         return view('dashboard', compact('customers'));
     }
 }

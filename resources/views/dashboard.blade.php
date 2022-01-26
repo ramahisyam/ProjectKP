@@ -1,22 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
+<br>
 <div class="container">
+
+  {{-- start of search form --}}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form action="/" method="GET">
+        <div class="input-group mb-3">
+          <input name="search" type="text" class="form-control" placeholder="Search here . . ." name="search">
+          <button class="btn btn-outline-primary" type="submit" >Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {{-- end of search form --}}
+
+  {{-- table --}}
 <table class="table table-bordered">
   <thead>
     <br>
     <tr>
+
       {{-- start of column --}}
       <th scope="col">No.</th>
       <th scope="col">Business Key</th>
       <th scope="col">Customer</th>
+      <th scope="col">Phone Number</th>
       <th scope="col">Service</th>
       <th scope="col">Bandwith</th>
-      <th scope="col">Date and Time</th>
+      <th scope="col">Created At</th>
       <th scope="col">Latitude, Longitude</th>
       <th scope="col">Address</th>
       <th scope="col">Action</th>
       {{-- end of column --}}
+
     </tr>
   </thead>
   <tbody>
@@ -26,6 +45,7 @@
       <th scope="row"> {{ $index + $customers->firstItem() }} </th>
       <td>MNI.4G_L2100_10_MHz.GIN114.1623318482865</td> {{-- businessKeyExample --}}
       <td>{{ $customer->name }}</td>
+      <td>{{ $customer->phoneNumber }}</td>
       <td>{{ $customer->service->name }}</td>
       <td>123 MBps</td> {{-- bandwithExample --}}
       <td>{{$customer->created_at}}</td>
@@ -57,12 +77,14 @@
             </div>
           </div>
           {{-- end of modal --}}
+
       </td>
       <?php $no++ ;?>
      
     </tr>
 
     @empty
+
     {{-- if empty or data not exist --}}
     <div class="alert alert-danger">
       Data belum tersedia.
@@ -70,7 +92,7 @@
     
     @endforelse
     
-    <script>
+    {{-- <script>
       //message with toastr
       @if(session()->has('success'))
             
@@ -81,7 +103,7 @@
          toastr.error('{{ session('error') }}', 'GAGAL!'); 
                 
       @endif
-    </script>
+    </script> --}}
 
   </tbody>
 </table>
@@ -89,6 +111,8 @@
 {{-- pagination --}}
 {{ $customers->links() }}
 Showing {{$customers->firstItem()}} to {{$customers->lastItem()}} of {{$customers->total()}} entries
+<br>
+<br>
 
 </div>
 

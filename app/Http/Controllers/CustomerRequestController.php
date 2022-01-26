@@ -57,5 +57,10 @@ class CustomerRequestController extends Controller
             return redirect()->route('customer.create')->with(['error' => 'Data Gagal Disimpan']);
         }
     }
+
+    public function edit(CustomerRequest $customerRequest)
+    {
+        return view('backroom.edit', compact('customerRequest'));
+    }
     
 }

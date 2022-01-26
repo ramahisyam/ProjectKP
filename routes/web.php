@@ -20,6 +20,8 @@ Route::get('/customer', function(){
     return redirect()->route('home');
 });
 
+Route::get('/backroom', 'BackroomController@index')->name('backroom.index');
+
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
