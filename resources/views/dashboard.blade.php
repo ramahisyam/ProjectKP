@@ -4,19 +4,27 @@
 <br>
 <div class="container">
 
-  {{-- start of search form --}}
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <form action="/" method="GET">
-        <div class="input-group mb-3">
-          <input name="search" type="text" class="form-control" placeholder="Search here . . ." name="search">
-          <button class="btn btn-outline-primary" type="submit" >Search</button>
+  <div class="row">
+    <div class="col">
+      <h2 class="card-title">Dashboard Customer Request</h2>
+    </div>
+    <div class="col">
+      {{-- start of search form --}}
+      <div class="row justify-content-end">
+        <div class="col-md-12">
+          <form action="/" method="GET">
+            <div class="input-group mb-3">
+              <input name="search" type="text" class="form-control" placeholder="Search here . . ." name="search">
+              <button class="btn btn-outline-primary" type="submit" >Search</button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
+      {{-- end of search form --}}
     </div>
   </div>
-  {{-- end of search form --}}
-
+  <hr>
+  
   {{-- table --}}
 <table class="table table-bordered">
   <thead>
@@ -43,14 +51,39 @@
       <?php $no=1;?>
       @forelse ($customers as $index=>$customer)
       <th scope="row"> {{ $index + $customers->firstItem() }} </th>
-      <td>MNI.4G_L2100_10_MHz.GIN114.1623318482865</td> {{-- businessKeyExample --}}
-      <td>{{ $customer->name }}</td>
-      <td>{{ $customer->phoneNumber }}</td>
-      <td>{{ $customer->service->name }}</td>
-      <td>123 MBps</td> {{-- bandwithExample --}}
-      <td>{{$customer->created_at}}</td>
-      <td>{{$customer->latitude}}, {{$customer->longitude}}</td>
-      <td>{{$customer->address}}</td>
+
+      <td id="bussinessKey{{ $index + $customers->firstItem() }}">MNI.4G_L2100_10_MHz.GIN114.1623318482865
+        <button type="button" data-clipboard-target="#bussinessKey{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td> {{-- businessKeyExample --}}
+
+      <td id="customerName{{ $index + $customers->firstItem() }}">{{ $customer->name }}
+        <button type="button" data-clipboard-target="#customerName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button> 
+      </td>
+
+      <td id="phoneNumber{{ $index + $customers->firstItem() }}">{{ $customer->phoneNumber }}
+        <button type="button" data-clipboard-target="#phoneNumber{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
+
+      <td id="serviceName{{ $index + $customers->firstItem() }}">{{ $customer->service->name }}
+        <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
+
+      <td id="bandwith{{ $index + $customers->firstItem() }}">123 MBps
+        <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td> {{-- bandwithExample --}}
+
+      <td id="createdAt{{ $index + $customers->firstItem() }}">{{$customer->created_at}}
+        <button type="button" data-clipboard-target="#createdAt{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
+
+      <td id="latitudeLongitude{{ $index + $customers->firstItem() }}">{{$customer->latitude}}, {{$customer->longitude}}
+        <button type="button" data-clipboard-target="#latitudeLongitude{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
+
+      <td id="address{{ $index + $customers->firstItem() }}">{{$customer->address}}
+        <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
+
       <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal1">Details</button>
 
           <!-- Modal Example-->
@@ -113,6 +146,9 @@
           {{-- end of modal --}}
 
       </td>
+
+      
+
       <?php $no++ ;?>
      
     </tr>
@@ -138,9 +174,12 @@
                 
       @endif
     </script> --}}
+    
 
   </tbody>
 </table>
+
+ 
 
 {{-- pagination --}}
 {{ $customers->links() }}

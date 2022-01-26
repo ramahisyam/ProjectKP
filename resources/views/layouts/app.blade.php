@@ -77,7 +77,20 @@
     <main>
         @yield('content')
     </main>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"> </script>
+    {{-- <script src="C:/Users/Lenovo/node_modules/clipboard/dist/clipboard.min.js"></script> --}}
+    <script>
+        var clipboard = new ClipboardJS('.btn');
+  
+        clipboard.on('success', function (e) {
+          console.log(e);
+        });
+  
+        clipboard.on('error', function (e) {
+          console.log(e);
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
 </body>
 </html>
