@@ -26,7 +26,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $customers = CustomerRequest::latest()->paginate(10);
+        
+        $customers = CustomerRequest::latest()->filter(request(['search']))->paginate(10);
+        
         return view('dashboard', compact('customers')); 
     }
     

@@ -9,18 +9,21 @@
       <h2 class="card-title">Dashboard Customer Request</h2>
     </div>
     <div class="col">
+
       {{-- start of search form --}}
       <div class="row justify-content-end">
         <div class="col-md-12">
           <form action="/" method="GET">
             <div class="input-group mb-3">
-              <input name="search" type="text" class="form-control" placeholder="Search here . . ." name="search">
+
+              <input name="search" type="text" class="form-control" placeholder="Search here . . ." value="{{request('search')}}">
               <button class="btn btn-outline-primary" type="submit" >Search</button>
             </div>
           </form>
         </div>
       </div>
       {{-- end of search form --}}
+      
     </div>
   </div>
   <hr>
@@ -147,8 +150,6 @@
 
       </td>
 
-      
-
       <?php $no++ ;?>
      
     </tr>
@@ -161,20 +162,6 @@
     </div>
     
     @endforelse
-    
-    {{-- <script>
-      //message with toastr
-      @if(session()->has('success'))
-            
-         toastr.success('{{ session('success') }}', 'BERHASIL!'); 
-    
-      @elseif(session()->has('error'))
-    
-         toastr.error('{{ session('error') }}', 'GAGAL!'); 
-                
-      @endif
-    </script> --}}
-    
 
   </tbody>
 </table>
