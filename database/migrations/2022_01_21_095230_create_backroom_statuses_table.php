@@ -16,9 +16,9 @@ class CreateBackroomStatusesTable extends Migration
         Schema::create('backroom_statuses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('backroom_id')->constrained('backrooms')->onDelete('cascade');
-            $table->foreignId('backroom_request_id')->constrained('customer_requests')->onDelete('cascade');
-            $table->enum('status', ['Waiting to Process', 'Not Ready', 'Ready']);
-            $table->string('information');
+            $table->foreignId('customer_request_id')->constrained('customer_requests')->onDelete('cascade');
+            $table->enum('name', ['Waiting to Process', 'Not Ready', 'Ready']);
+            $table->string('information')->nullable();
             $table->timestamps();
         });
     }

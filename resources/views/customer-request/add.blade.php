@@ -7,7 +7,7 @@
           Data Berhasil Disimpan
         </div>
       @endif
-        <h2 class="card-title">Customer Request</h2>
+        <h2 class="card-title">Input Customer Request</h2>
         <hr>
         <form action="{{ route('customer.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
@@ -34,21 +34,10 @@
                 </div>
               </div>
             <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Latitude</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Latlong</label>
                 <div class="col-sm-10">
-                  <input name="latitude" type="name" class="form-control @error('latitude') is-invalid @enderror" id="inputEmail3" placeholder="Latitude" value="{{ old('latitude') }}">
-                  @error('latitude')
-                    <div class="alert alert-danger mt-2">
-                      {{ $message }}
-                    </div>
-                  @enderror
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Longitude</label>
-                <div class="col-sm-10">
-                  <input name="longitude" type="name" class="form-control @error('longitude') is-invalid @enderror" id="inputEmail3" placeholder="Longitude" value="{{ old('longitude') }}">
-                  @error('longitude')
+                  <input name="latlong" type="name" class="form-control @error('latlong') is-invalid @enderror" id="inputEmail3" placeholder="Latitude & Longitude" value="{{ old('latlong') }}">
+                  @error('latlong')
                     <div class="alert alert-danger mt-2">
                       {{ $message }}
                     </div>

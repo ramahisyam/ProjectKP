@@ -26,4 +26,9 @@ class CustomerRequest extends Model
     public function service() {
         return $this->belongsTo(Service::class, 'service_id');
     }
+
+    public function statuses()
+    {
+        return $this->hasMany(BackroomStatus::class);
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\BackroomStatus;
 use App\Models\CustomerRequest;
 
 use Illuminate\Http\Request;
@@ -26,11 +28,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        
-        $customers = CustomerRequest::latest()->filter(request(['search']))->paginate(10);
-        
-        return view('dashboard', compact('customers')); 
+      $customers = CustomerRequest::latest()
+        ->filter(request(['search']))
+        ->with('service.backrooms')
+        ->with('statuses')
+        ->paginate(10);
+        return view('dashboard', compact('customers'));
     }
-    
-    
 }
