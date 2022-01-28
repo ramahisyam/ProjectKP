@@ -30,11 +30,21 @@
     
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('customer.create') }}">Customer Request</a>
-                            </li>
-                        </ul>
+                        @can('input customer request')
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ route('customer.create') }}">Input Customer Request</a>
+                                </li>
+                            </ul>
+                        @endcan
+
+                        @can('backroom')
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ route('backroom.index') }}">Backroom Dashboard</a>
+                                </li>
+                            </ul>
+                        @endcan
     
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
@@ -43,12 +53,6 @@
                                 @if (Route::has('login'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                @endif
-    
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                     </li>
                                 @endif
                             @else

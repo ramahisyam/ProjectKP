@@ -23,8 +23,8 @@ class CustomerRequestSeeder extends Seeder
             $customerRequest = CustomerRequest::create([
                 'name' => $faker->name,
                 'phoneNumber' => '08' . strval($faker->numerify('##########')),
-                'latitude' => strval($faker->numberBetween(0,99)) . '.' . strval($faker->randomNumber()),
-                'longitude' => strval($faker->numberBetween(0,99)) . '.' . strval($faker->randomNumber()),
+                'latlong' => strval($faker->numberBetween(0,99)) . '.' . strval($faker->randomNumber() . ', ' 
+                . $faker->numberBetween(0,99)) . '.' . strval($faker->randomNumber()),
                 'address' => $faker->address,
                 'service_id' => $faker->numberBetween(1,2),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -37,7 +37,7 @@ class CustomerRequestSeeder extends Seeder
                 BackroomStatus::create([
                     'customer_request_id' => $customerRequest->id,
                     'backroom_id' => $customer->id,
-                    'status' => 'Waiting to Process',
+                    'name' => 'Waiting to Process',
                     'information' => 'No info'
                 ]);
             }

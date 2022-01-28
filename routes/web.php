@@ -20,8 +20,14 @@ Route::get('/customer', function(){
     return redirect()->route('home');
 });
 
-Route::get('/backroom', 'BackroomController@index')->name('backroom.index');
+Route::get('/backroom', 'BackroomController@index')->middleware('permission:backroom')->name('backroom.index');
+Route::get('/backroom/{status}/edit', 'BackroomController@edit')->name('backroom.edit');
+Route::put('/backroom/{status}', 'BackroomController@update')->name('backroom.update');
 
-Auth::routes();
+Auth::routes([
+    'register' => false, 
+    'reset' => false, 
+    'verify' => false,
+]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

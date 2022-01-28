@@ -25,8 +25,7 @@ class CustomerRequestController extends Controller
         $this->validate($request, [
             'name' => 'required|max:30',
             'phoneNumber' => 'required|digits_between:1,13',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
+            'latlong' => 'required|numeric',
             'address' => 'required|max:255',
             'service_id' => 'required|exists:services,id'
         ]);
@@ -34,8 +33,7 @@ class CustomerRequestController extends Controller
         $customerRequest = CustomerRequest::create([
             'name' => $request->name,
             'phoneNumber' => $request->phoneNumber,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
+            'latlong' => $request->latlong,
             'address' => $request->address,
             'service_id' => $request->service_id
         ]);

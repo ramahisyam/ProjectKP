@@ -28,7 +28,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        $customers = CustomerRequest::latest()->with('service.backrooms.status')->paginate(10);
+        $customers = CustomerRequest::latest()->with('service.backrooms')->with('statuses')->paginate(10);
+        // dd($customers);
         return view('dashboard', compact('customers'));
     }
 }

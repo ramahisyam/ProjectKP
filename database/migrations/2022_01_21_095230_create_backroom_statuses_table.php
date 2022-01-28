@@ -17,8 +17,8 @@ class CreateBackroomStatusesTable extends Migration
             $table->id();
             $table->foreignId('backroom_id')->constrained('backrooms')->onDelete('cascade');
             $table->foreignId('customer_request_id')->constrained('customer_requests')->onDelete('cascade');
-            $table->enum('status', ['Waiting to Process', 'Not Ready', 'Ready']);
-            $table->string('information');
+            $table->enum('name', ['Waiting to Process', 'Not Ready', 'Ready']);
+            $table->string('information')->nullable();
             $table->timestamps();
         });
     }

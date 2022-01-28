@@ -3,20 +3,26 @@
 @section('content')
 <br>
 <div class="container">
-
-  {{-- start of search form --}}
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <form action="/" method="GET">
-        <div class="input-group mb-3">
-          <input name="search" type="text" class="form-control" placeholder="Search here . . ." name="search">
-          <button class="btn btn-outline-primary" type="submit" >Search</button>
+  <div class="row">
+    <div class="col">
+      <h2 class="card-title">Dashboard Customer Request</h2>
+    </div>
+    <div class="col">
+      {{-- start of search form --}}
+      <div class="row justify-content-end">
+        <div class="col-md-12">
+          <form action="/" method="GET">
+            <div class="input-group mb-3">
+              <input name="search" type="text" class="form-control" placeholder="Search here . . ." name="search">
+              <button class="btn btn-outline-primary" type="submit" >Search</button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
+      {{-- end of search form --}}
     </div>
   </div>
-  {{-- end of search form --}}
-
+  <hr>
   {{-- table --}}
 <table class="table table-bordered">
   <thead>
@@ -49,7 +55,7 @@
       <td>{{ $customer->service->name }}</td>
       <td>123 MBps</td> {{-- bandwithExample --}}
       <td>{{$customer->created_at}}</td>
-      <td>{{$customer->latitude}}, {{$customer->longitude}}</td>
+      <td>{{$customer->latlong}}</td>
       <td>{{$customer->address}}</td>
       <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}">Details</button>
           <!-- Modal -->
@@ -61,12 +67,22 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  @foreach ($customer->service->backrooms as $backroomStatus)
-                    {{ $backroomStatus->name }}
+                  @foreach ($customer->service->backrooms as $backroom)
+                    {{ $backroom->name }}
                     <br>
-                    Status  : <span class="badge rounded-pill bg-secondary">{{ $backroomStatus->status->status }}</span>
-                    <br>
-                    Notes : {{ $backroomStatus->status->information }}
+                    @foreach ($customer->statuses as $status)
+                        @if ($status->backroom_id == $backroom->id)
+                          @if ($status->name == 'Waiting to Process')
+                            Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
+                          @elseif ($status->name == 'Not Ready')
+                            Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
+                          @elseif ($status->name == 'Ready')
+                            Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
+                          @endif
+                          <br>
+                          Notes : {{ $status->information }}
+                        @endif
+                    @endforeach
                     <hr>
                   @endforeach
                 </div>
