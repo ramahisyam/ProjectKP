@@ -5,7 +5,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="card-title">Dashboard Customer Request</h2>
+      <h2 class="card-title">Dashboard Backroom</h2>
     </div>
     <div class="col">
       {{-- start of search form --}}
@@ -23,6 +23,7 @@
     </div>
   </div>
   <hr>
+
   {{-- table --}}
 <table class="table table-bordered">
   <thead>
@@ -39,7 +40,7 @@
       <th scope="col">Created At</th>
       <th scope="col">Latitude, Longitude</th>
       <th scope="col">Address</th>
-      <th scope="col">Action</th>
+      <th scope="col" colspan="2">Action</th>
       {{-- end of column --}}
 
     </tr>
@@ -57,7 +58,9 @@
       <td>{{$customer->created_at}}</td>
       <td>{{$customer->latlong}}</td>
       <td>{{$customer->address}}</td>
-      <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}">Details</button>
+      <td>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}">Details</button>
+      </td>
           <!-- Modal -->
           <div class="modal fade" id="detailModal{{ $customer->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >         
             <div class="modal-dialog modal-dialog-scrollable">
@@ -68,21 +71,28 @@
                 </div>
                 <div class="modal-body">
                   @foreach ($customer->service->backrooms as $backroom)
-                    {{ $backroom->name }}
-                    <br>
-                    @foreach ($customer->statuses as $status)
-                        @if ($status->backroom_id == $backroom->id)
-                          @if ($status->name == 'Waiting to Process')
-                            Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
-                          @elseif ($status->name == 'Not Ready')
-                            Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
-                          @elseif ($status->name == 'Ready')
-                            Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
-                          @endif
-                          <br>
-                          Notes : {{ $status->information }}
-                        @endif
-                    @endforeach
+                        <div class="container">
+                          <h5>{{ $backroom->name }}</h5>
+                          <div class="row">
+                            @foreach ($customer->statuses as $status)
+                              @if ($status->backroom_id == $backroom->id)
+                                <div class="col">
+                                  @if ($status->name == 'Waiting to Process')
+                                  Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
+                                  @elseif ($status->name == 'Not Ready')
+                                    Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
+                                  @elseif ($status->name == 'Ready')
+                                    Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
+                                  @endif
+                                </div>
+                                <div class="col">
+                                  <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle">Edit</a>
+                                </div>
+                                <p>Notes : {{ $status->information }}</p>
+                              @endif
+                            @endforeach
+                          </div>
+                        </div>
                     <hr>
                   @endforeach
                 </div>
