@@ -11,9 +11,9 @@
       {{-- start of search form --}}
       <div class="row justify-content-end">
         <div class="col-md-12">
-          <form action="/" method="GET">
+          <form action="/backroom" method="GET">
             <div class="input-group mb-3">
-              <input name="search" type="text" class="form-control" placeholder="Search here . . ." name="search">
+              <input type="text" class="form-control" placeholder="Search here . . ." name="search">
               <button class="btn btn-outline-primary" type="submit" >Search</button>
             </div>
           </form>
@@ -50,14 +50,37 @@
       <?php $no=1;?>
       @forelse ($customers as $index=>$customer)
       <th scope="row"> {{ $index + $customers->firstItem() }} </th>
-      <td>MNI.4G_L2100_10_MHz.GIN114.1623318482865</td> {{-- businessKeyExample --}}
-      <td>{{ $customer->name }}</td>
-      <td>{{ $customer->phoneNumber }}</td>
-      <td>{{ $customer->service->name }}</td>
-      <td>123 MBps</td> {{-- bandwithExample --}}
-      <td>{{$customer->created_at}}</td>
-      <td>{{$customer->latlong}}</td>
-      <td>{{$customer->address}}</td>
+      <td id="bussinessKey{{ $index + $customers->firstItem() }}">MNI.4G_L2100_10_MHz.GIN114.1623318482865
+        <button type="button" data-clipboard-target="#bussinessKey{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td> {{-- businessKeyExample --}}
+
+      <td id="customerName{{ $index + $customers->firstItem() }}">{{ $customer->name }}
+        <button type="button" data-clipboard-target="#customerName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button> 
+      </td>
+
+      <td id="phoneNumber{{ $index + $customers->firstItem() }}">{{ $customer->phoneNumber }}
+        <button type="button" data-clipboard-target="#phoneNumber{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
+
+      <td id="serviceName{{ $index + $customers->firstItem() }}">{{ $customer->service->name }}
+        <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
+
+      <td id="bandwith{{ $index + $customers->firstItem() }}">123 MBps
+        <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td> {{-- bandwithExample --}}
+
+      <td id="createdAt{{ $index + $customers->firstItem() }}">{{$customer->created_at}}
+        <button type="button" data-clipboard-target="#createdAt{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
+
+      <td id="latitudeLongitude{{ $index + $customers->firstItem() }}">{{$customer->latlong}}
+        <button type="button" data-clipboard-target="#latitudeLongitude{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
+
+      <td id="address{{ $index + $customers->firstItem() }}">{{$customer->address}}
+        <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+      </td>
       <td>
         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}">Details</button>
       </td>
@@ -85,7 +108,7 @@
                                     Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
                                   @endif
                                 </div>
-                                <div class="col d-md-flex justify-content-end">
+                                <div class="col d-md-flex justify-content-md-end">
                                   <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle">Edit</a>
                                 </div>
                                 <p>Notes : {{ $status->information }}</p>
@@ -118,19 +141,6 @@
     
     @endforelse
     
-    {{-- <script>
-      //message with toastr
-      @if(session()->has('success'))
-            
-         toastr.success('{{ session('success') }}', 'BERHASIL!'); 
-    
-      @elseif(session()->has('error'))
-    
-         toastr.error('{{ session('error') }}', 'GAGAL!'); 
-                
-      @endif
-    </script> --}}
-
   </tbody>
 </table>
 
