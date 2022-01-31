@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -28,11 +28,18 @@ class HomeController extends Controller
 
     public function index()
     {
-      $customers = CustomerRequest::latest()
+        $user = auth()->user();
+
+        $customers = CustomerRequest::latest()
         ->filter(request(['search']))
         ->with('service.backrooms')
         ->with('statuses')
         ->paginate(10);
-        return view('dashboard', compact('customers'));
+
+        if ($user->hasRole('AM')) {
+            return view('dashboard', compact('customers'));
+        } else {
+            return redirect()->route('backroom.index');
+        }
     }
 }

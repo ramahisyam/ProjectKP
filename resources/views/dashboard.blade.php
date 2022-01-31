@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@can('customer')
 <br>
 <div class="container">
   <div class="row">
@@ -153,5 +154,5 @@ Showing {{$customers->firstItem()}} to {{$customers->lastItem()}} of {{$customer
 <br>
 
 </div>
-
+@endcan
 @endsection
