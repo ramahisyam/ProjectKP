@@ -22,6 +22,10 @@ class PermissionSeeder extends Seeder
             [
                 'name' => 'backroom',
                 'guard_name' => 'web'
+            ],
+            [
+                'name' => 'customer',
+                'guard_name' => 'web'
             ]
         ];
 

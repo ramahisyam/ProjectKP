@@ -25,7 +25,7 @@
   <hr>
 
   {{-- table --}}
-<table class="table table-bordered">
+<table class="table table-striped table-bordered">
   <thead>
     <br>
     <tr>
@@ -33,13 +33,13 @@
       {{-- start of column --}}
       <th scope="col">No.</th>
       <th scope="col">Business Key</th>
-      <th scope="col">Customer</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Service</th>
+      <th scope="col">@sortablelink('name', 'Customer')</th>
+      <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
+      <th scope="col">@sortablelink('service_id', 'Service')</th>
       <th scope="col">Bandwith</th>
-      <th scope="col">Created At</th>
-      <th scope="col">Latitude, Longitude</th>
-      <th scope="col">Address</th>
+      <th scope="col">@sortablelink('created_at', 'Created At')</th>
+      <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
+      <th scope="col">@sortablelink('address', 'Address')</th>
       <th scope="col" colspan="2">Action</th>
       {{-- end of column --}}
 

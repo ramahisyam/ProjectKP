@@ -33,12 +33,13 @@ class UserSeeder extends Seeder
         $witel2->givePermissionTo('backroom');
 
         $am = User::create([
-            'name' => 'Hisyam',
-            'email' => 'ramahisyam002@gmail.com',
+            'name' => 'Account Manager',
+            'email' => 'am.telkom@telkom.co.id',
             'password' => bcrypt('123456789'),
         ]);
 
         $am->assignRole('AM');
         $am->givePermissionTo('input customer request');
+        $am->givePermissionTo('customer');
     }
 }
