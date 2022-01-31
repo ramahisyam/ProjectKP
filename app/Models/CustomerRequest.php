@@ -4,13 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 use App\Models\Service;
 
 class CustomerRequest extends Model
 {
     use HasFactory;
 
+    use Sortable;
+
     protected $guarded = [];
+    public $sortable = ['id', 'name', 'service_id', 'created_at', 'updated_at', 'address', 'phoneNumber', 'latlong'];
 
     public function scopeFilter($query, array $filters){
 
