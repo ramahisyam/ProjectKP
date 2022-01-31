@@ -30,13 +30,7 @@
     
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        @can('input customer request')
-                            <ul class="navbar-nav me-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="{{ route('customer.create') }}">Input Customer Request</a>
-                                </li>
-                            </ul>
-                        @endcan
+                        
 
                         @can('backroom')
                             <ul class="navbar-nav me-auto">

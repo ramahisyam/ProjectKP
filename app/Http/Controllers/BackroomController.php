@@ -19,7 +19,7 @@ class BackroomController extends Controller
         $user = auth()->user();
         // dd($user->getRoleNames());
         if ($user->can('backroom')) {
-            $customers = CustomerRequest::latest()->with(['service.backrooms' => function ($query) use ($user){
+            $customers = CustomerRequest::latest()->filter(request(['search']))->with(['service.backrooms' => function ($query) use ($user){
                 $query->whereIn('name', $user->getRoleNames());
             }])->whereHas('service.backrooms', function($query) use ($user){
                 $query->whereIn('name', $user->getRoleNames());

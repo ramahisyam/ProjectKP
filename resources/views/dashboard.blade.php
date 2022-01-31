@@ -23,6 +23,15 @@
     </div>
   </div>
   <hr>
+
+  @can('input customer request')
+  
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a class="btn btn-primary me-md-2 btn-sm" type="button" href="{{ route('customer.create') }}">Add New Customer</a>
+    </div>
+                            
+  @endcan
+
   {{-- table --}}
 <table class="table table-bordered">
   <thead>
