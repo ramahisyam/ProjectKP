@@ -52,6 +52,7 @@
                             @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <ion-icon name="person-circle-outline"></ion-icon>
                                         {{ Auth::user()->name }}
                                     </a>
     
@@ -59,7 +60,7 @@
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            {{ __('Logout') }} <ion-icon name="log-out-outline"></ion-icon>
                                         </a>
     
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -93,5 +94,7 @@
         });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
