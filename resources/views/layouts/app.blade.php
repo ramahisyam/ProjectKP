@@ -37,14 +37,6 @@
                                 </li>
                             </ul>
                         @endcan
-
-                        @can('backroom')
-                            <ul class="navbar-nav me-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="{{ route('backroom.index') }}">Backroom Dashboard</a>
-                                </li>
-                            </ul>
-                        @endcan
     
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">

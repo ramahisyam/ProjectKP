@@ -25,7 +25,7 @@ class CustomerRequestController extends Controller
         $this->validate($request, [
             'name' => 'required|max:30',
             'phoneNumber' => 'required|digits_between:1,13',
-            'latlong' => 'required|numeric',
+            'latlong' => 'required',
             'address' => 'required|max:255',
             'service_id' => 'required|exists:services,id'
         ]);
@@ -44,7 +44,7 @@ class CustomerRequestController extends Controller
             BackroomStatus::create([
                 'customer_request_id' => $customerRequest->id,
                 'backroom_id' => $customer->id,
-                'status' => 'Waiting to Process',
+                'name' => 'Waiting to Process',
                 'information' => 'No info'
             ]);
         }

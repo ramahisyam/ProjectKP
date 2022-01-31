@@ -85,7 +85,7 @@
                                     Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
                                   @endif
                                 </div>
-                                <div class="col">
+                                <div class="col d-md-flex justify-content-end">
                                   <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle">Edit</a>
                                 </div>
                                 <p>Notes : {{ $status->information }}</p>
