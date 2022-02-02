@@ -28,13 +28,13 @@
   @can('input customer request')
   
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary me-md-2 btn-sm" type="button" href="{{ route('customer.create') }}">Add New Customer</a>
+      <a class="btn btn-primary me-md-2 btn-sm" type="button" href="{{ route('customer.create') }}"><ion-icon name="add-circle-outline"></ion-icon> Add New Customer</a>
     </div>
                             
   @endcan
 
   {{-- table --}}
-<table class="table table-bordered">
+<table class="table table-striped table-bordered">
   <thead>
     <br>
     <tr>
@@ -42,13 +42,13 @@
       {{-- start of column --}}
       <th scope="col">No.</th>
       <th scope="col">Business Key</th>
-      <th scope="col">Customer</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Service</th>
+      <th scope="col">@sortablelink('name', 'Customer')</th>
+      <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
+      <th scope="col">@sortablelink('service_id', 'Service')</th>
       <th scope="col">Bandwith</th>
-      <th scope="col">Created At</th>
-      <th scope="col">Latitude, Longitude</th>
-      <th scope="col">Address</th>
+      <th scope="col">@sortablelink('created_at', 'Created At')</th>
+      <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
+      <th scope="col">@sortablelink('address', 'Address')</th>
       <th scope="col">Action</th>
       {{-- end of column --}}
 
@@ -60,37 +60,37 @@
       @forelse ($customers as $index=>$customer)
       <th scope="row"> {{ $index + $customers->firstItem() }} </th>
       <td id="bussinessKey{{ $index + $customers->firstItem() }}">MNI.4G_L2100_10_MHz.GIN114.1623318482865
-        <button type="button" data-clipboard-target="#bussinessKey{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+        <button type="button" data-clipboard-target="#bussinessKey{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- businessKeyExample --}}
 
       <td id="customerName{{ $index + $customers->firstItem() }}">{{ $customer->name }}
-        <button type="button" data-clipboard-target="#customerName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button> 
+        <button type="button" data-clipboard-target="#customerName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button> 
       </td>
 
       <td id="phoneNumber{{ $index + $customers->firstItem() }}">{{ $customer->phoneNumber }}
-        <button type="button" data-clipboard-target="#phoneNumber{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+        <button type="button" data-clipboard-target="#phoneNumber{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
       <td id="serviceName{{ $index + $customers->firstItem() }}">{{ $customer->service->name }}
-        <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+        <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
       <td id="bandwith{{ $index + $customers->firstItem() }}">123 MBps
-        <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+        <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- bandwithExample --}}
 
       <td id="createdAt{{ $index + $customers->firstItem() }}">{{$customer->created_at}}
-        <button type="button" data-clipboard-target="#createdAt{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+        <button type="button" data-clipboard-target="#createdAt{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
       <td id="latitudeLongitude{{ $index + $customers->firstItem() }}">{{$customer->latlong}}
-        <button type="button" data-clipboard-target="#latitudeLongitude{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+        <button type="button" data-clipboard-target="#latitudeLongitude{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
       <td id="address{{ $index + $customers->firstItem() }}">{{$customer->address}}
-        <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm">Copy</button>
+        <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
-      <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}">Details</button>
+      <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button>
           <!-- Modal -->
           <div class="modal fade" id="detailModal{{ $customer->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div class="modal-dialog modal-dialog-scrollable">
@@ -126,6 +126,8 @@
             </div>
           </div>
           {{-- end of modal --}}
+          <a class="btn btn-warning"><ion-icon name="create-outline"></ion-icon></a>
+          <a class="btn btn-danger"><ion-icon name="trash-outline"></ion-icon></a>
 
       </td>
 
