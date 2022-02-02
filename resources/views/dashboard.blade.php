@@ -90,7 +90,9 @@
       <td id="address{{ $index + $customers->firstItem() }}">{{$customer->address}}
         <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
-      <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button>
           <!-- Modal -->
           <div class="modal fade" id="detailModal{{ $customer->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div class="modal-dialog modal-dialog-scrollable">
@@ -128,6 +130,7 @@
           {{-- end of modal --}}
           <a class="btn btn-warning"><ion-icon name="create-outline"></ion-icon></a>
           <a class="btn btn-danger"><ion-icon name="trash-outline"></ion-icon></a>
+        </div>
 
       </td>
 
