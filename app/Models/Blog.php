@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
 }
+=======
+    
+    /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'image', 'title', 'content'
+    ];
+}
+>>>>>>> refs/remotes/origin/tina
