@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CustomerRequest;
 use App\Models\Service;
 use App\Models\BackroomStatus;
+use Axiom\Rules\LocationCoordinates;
 
 class CustomerRequestController extends Controller
 {
@@ -25,7 +26,7 @@ class CustomerRequestController extends Controller
         $this->validate($request, [
             'name' => 'required|max:30',
             'phoneNumber' => 'required|digits_between:1,13',
-            'latlong' => 'required',
+            'latlong' => ['required', new LocationCoordinates],
             'address' => 'required|max:255',
             'service_id' => 'required|exists:services,id'
         ]);
