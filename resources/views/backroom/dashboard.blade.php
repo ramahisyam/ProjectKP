@@ -120,7 +120,7 @@
                   @endforeach
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><ion-icon name="checkmark-circle-outline"></ion-icon> Complete Task</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
                 </div>
               </div>
             </div>

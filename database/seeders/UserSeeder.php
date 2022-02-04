@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         $mso = User::create([
             'name' => 'Rama',
-            'email' => 'ramahisyam1@gmail.com',
+            'email' => 'mso.telkom@telkom.co.id',
             'password' => bcrypt('123456789'),
         ]);
 
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
 
         $witel2 = User::create([
             'name' => 'Rama Hisyam',
-            'email' => 'ramsea.gaming@gmail.com',
+            'email' => 'witel2.telkom@telkom.co.id',
             'password' => bcrypt('123456789'),
         ]);
 
