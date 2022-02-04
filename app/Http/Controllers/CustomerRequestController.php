@@ -59,7 +59,6 @@ class CustomerRequestController extends Controller
 
     public function edit(CustomerRequest $customer)
     {
-        // dd($customerRequest);
         $services = Service::all();
         return view('customer-request.edit', compact('customer', 'services'));
     }
@@ -74,13 +73,11 @@ class CustomerRequestController extends Controller
             'latlong' => $request->latlong,
             'address' => $request->address,
         ]);
-        // dd($customer);
 
-        return redirect()->route('home');
-        // if ($customer) {
-        //     return redirect()->route('home')->with(['success' => 'Data Berhasil Disimpan']);
-        // }else {
-        //     return redirect()->route('home')->with(['error' => 'Data Gagal Disimpan']);
-        // }
+        if ($customer) {
+            return redirect()->route('home')->with(['success' => 'Data Berhasil Disimpan']);
+        }else {
+            return redirect()->route('home')->with(['error' => 'Data Gagal Disimpan']);
+        }
     }
 }
