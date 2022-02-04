@@ -30,6 +30,7 @@ class HomeController extends Controller
     {
         $user = auth()->user();
         $customers = CustomerRequest::sortable()
+        ->latest()
         ->filter(request(['search']))
         ->with('service.backrooms')
         ->with('statuses')
