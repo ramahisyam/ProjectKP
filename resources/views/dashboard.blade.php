@@ -90,8 +90,10 @@
       <td id="address{{ $index + $customers->firstItem() }}">{{$customer->address}}
         <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
-      <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button> 
-        <!-- Modal -->
+      <td width=200px>
+        <div class="flex-parent jc-center">
+        <button type="button" class="btn btn-info btn-sm btn-primary-spacing" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button>
+          <!-- Modal -->
           <div class="modal fade" id="detailModal{{ $customer->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div class="modal-dialog modal-dialog-scrollable">
               <div class="modal-content">
@@ -126,12 +128,13 @@
             </div>
           </div>
           {{-- end of modal --}}
-          <a class="btn btn-warning"><ion-icon name="create-outline"></ion-icon></a>
+          <a class="btn btn-warning btn-primary-spacing btn-sm" href="{{ route('customer.edit', $customer->id) }}"><ion-icon name="create-outline"></ion-icon></a>
           <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('customer.destroy', $customer->id) }}" method="POST">
           @csrf
           @method('DELETE')
-          <button type="submit" class="btn btn-danger"><ion-icon name="trash-outline"></ion-icon></button> 
+          <button type="submit" class="btn btn-danger btn-primary-spacing btn-sm"><ion-icon name="trash-outline"></ion-icon></button> 
           </form>
+        </div>
 
       </td>
 

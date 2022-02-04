@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CustomerRequest;
 use App\Models\Service;
 use App\Models\BackroomStatus;
+use Axiom\Rules\LocationCoordinates;
 
 class CustomerRequestController extends Controller
 {
@@ -25,7 +26,7 @@ class CustomerRequestController extends Controller
         $this->validate($request, [
             'name' => 'required|max:30',
             'phoneNumber' => 'required|digits_between:1,13',
-            'latlong' => 'required|numeric',
+            'latlong' => ['required', new LocationCoordinates],
             'address' => 'required|max:255',
             'service_id' => 'required|exists:services,id'
         ]);
@@ -44,7 +45,7 @@ class CustomerRequestController extends Controller
             BackroomStatus::create([
                 'customer_request_id' => $customerRequest->id,
                 'backroom_id' => $customer->id,
-                'status' => 'Waiting to Process',
+                'name' => 'Waiting to Process',
                 'information' => 'No info'
             ]);
         }
@@ -56,9 +57,10 @@ class CustomerRequestController extends Controller
         }
     }
 
-    public function edit(CustomerRequest $customerRequest)
+    public function edit(CustomerRequest $customer)
     {
-        return view('backroom.edit', compact('customerRequest'));
+        $services = Service::all();
+        return view('customer-request.edit', compact('customer', 'services'));
     }
 
     /**
@@ -82,4 +84,21 @@ class CustomerRequestController extends Controller
        }
    }    
     
+    public function update(Request $request, CustomerRequest $customer)
+    {
+        $customer = CustomerRequest::findOrFail($customer->id);
+
+        $customer->update([
+            'name' => $request->name,
+            'phoneNumber' => $request->phoneNumber,
+            'latlong' => $request->latlong,
+            'address' => $request->address,
+        ]);
+
+        if ($customer) {
+            return redirect()->route('home')->with(['success' => 'Data Berhasil Disimpan']);
+        }else {
+            return redirect()->route('home')->with(['error' => 'Data Gagal Disimpan']);
+        }
+    }
 }
