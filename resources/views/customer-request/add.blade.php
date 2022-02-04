@@ -2,11 +2,6 @@
 
 @section('content')
     <div class="container mt-5 mb-5">
-      @if (session('success'))
-        <div class="alert alert-success mt-2">
-          Data Berhasil Disimpan
-        </div>
-      @endif
         <h2 class="card-title">Input Customer Request</h2>
         <hr>
         <form action="{{ route('customer.store') }}" method="POST" enctype="multipart/form-data">

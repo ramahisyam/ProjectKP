@@ -31,8 +31,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-
-        $customers = CustomerRequest::latest()
+        $customers = CustomerRequest::sortable()
+        ->latest()
         ->filter(request(['search']))
         ->with('service.backrooms')
         ->with('statuses')
