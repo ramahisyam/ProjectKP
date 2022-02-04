@@ -5,49 +5,81 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CustomerRequest;
 use App\Models\Service;
+use App\Models\BackroomStatus;
 
 class CustomerRequestController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create() {
         $services = Service::all();
 
         return view('customer-request.add', compact('services'));
 
-        //return view('dashboard', compact('services'));
-
-        // $blogs = Service::latest()->paginate(10);
-        // return view('dashboard', compact('blogs'));
-
-        
     }
 
     public function store(Request $request) {
         $this->validate($request, [
-            'name' => 'required',
-            'phoneNumber' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'address' => 'required',
-            'service_id' => 'required'
+            'name' => 'required|max:30',
+            'phoneNumber' => 'required|digits_between:1,13',
+            'latlong' => 'required|numeric',
+            'address' => 'required|max:255',
+            'service_id' => 'required|exists:services,id'
         ]);
+
         $customerRequest = CustomerRequest::create([
             'name' => $request->name,
             'phoneNumber' => $request->phoneNumber,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
+            'latlong' => $request->latlong,
             'address' => $request->address,
             'service_id' => $request->service_id
         ]);
 
-        if ($customerRequest) {
+        $customers = $customerRequest->service->backrooms;
+
+        foreach ($customers as $customer) {
+            BackroomStatus::create([
+                'customer_request_id' => $customerRequest->id,
+                'backroom_id' => $customer->id,
+                'status' => 'Waiting to Process',
+                'information' => 'No info'
+            ]);
+        }
+
+        if ($customer) {
             return redirect()->route('customer.create')->with(['success' => 'Data Berhasil Disimpan']);
         }else {
             return redirect()->route('customer.create')->with(['error' => 'Data Gagal Disimpan']);
         }
     }
 
-    public function index() {
-        $services = CustomerRequest::latest()->paginate(10);
-        return view('dashboard', compact('services'));
+    public function edit(CustomerRequest $customerRequest)
+    {
+        return view('backroom.edit', compact('customerRequest'));
     }
+
+    /**
+     * * destroy
+     * *
+     * * @param  mixed $id
+     * * @return void
+     * */
+    
+    public function destroy($id)
+    {
+        $customers = CustomerRequest::findOrFail($id);
+        $customers->delete();
+        
+        if($customers){
+            //redirect dengan pesan sukses
+            return redirect()->route('home')->with(['success' => 'Data Berhasil Dihapus!']);
+       }else{
+           //redirect dengan pesan error
+           return redirect()->route('home')->with(['error' => 'Data Gagal Dihapus!']);
+       }
+   }    
+    
 }

@@ -4,21 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\CustomerRequest;
-use App\Models\Backroom;
 
-class Service extends Model
+class BackroomStatus extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
     public function customerRequests() {
-        return $this->hasMany(CustomerRequest::class);
+        return $this->belongsTo(CustomerRequest::class, 'customer_request_id');
     }
 
-    public function backrooms()
-    {
-        return $this->belongsToMany(Backroom::class);
+    public function backrooms() {
+        return $this->belongsTo(Backroom::class, 'backroom_id');
     }
 }

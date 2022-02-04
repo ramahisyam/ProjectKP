@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Kyslik\ColumnSortable\Sortable;
 use App\Models\Service;
+use App\Models\BackroomStatus;
 
-class CustomerRequest extends Model
+class Backroom extends Model
 {
     use HasFactory;
-
-    use Sortable;
 
     protected $guarded = [];
     public $sortable = ['id', 'name', 'service_id', 'created_at', 'updated_at', 'address', 'phoneNumber', 'latlong'];
@@ -27,12 +25,12 @@ class CustomerRequest extends Model
         
     }
 
-    public function service() {
-        return $this->belongsTo(Service::class, 'service_id');
+    public function status() {
+        return $this->hasOne(BackroomStatus::class);
     }
-
-    public function statuses()
+    
+    public function services()
     {
-        return $this->hasMany(BackroomStatus::class);
+        return $this->belongsToMany(Service::class);
     }
 }

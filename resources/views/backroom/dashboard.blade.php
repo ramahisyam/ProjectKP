@@ -1,21 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-@can('customer')
 <br>
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="card-title">Dashboard Customer Request</h2>
+      <h2 class="card-title">Dashboard Backroom</h2>
     </div>
     <div class="col">
       {{-- start of search form --}}
       <div class="row justify-content-end">
         <div class="col-md-12">
-          <form action="/" method="GET">
+          <form action="/backroom" method="GET">
             <div class="input-group mb-3">
-              <input name="search" type="text" class="form-control" placeholder="Search here . . ." value="{{request('search')}}">
-              <button class="btn btn-outline-primary" type="submit" >Search</button>
+              <input type="text" class="form-control" placeholder="Search here . . ." name="search">
+              <button class="btn btn-outline-primary" type="submit" ><ion-icon name="search-outline"></ion-icon></button>
             </div>
           </form>
         </div>
@@ -24,14 +23,6 @@
     </div>
   </div>
   <hr>
-
-  @can('input customer request')
-  
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary me-md-2 btn-sm" type="button" href="{{ route('customer.create') }}"><ion-icon name="add-circle-outline"></ion-icon> Add New Customer</a>
-    </div>
-                            
-  @endcan
 
   {{-- table --}}
 <table class="table table-striped table-bordered">
@@ -49,7 +40,7 @@
       <th scope="col">@sortablelink('created_at', 'Created At')</th>
       <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
       <th scope="col">@sortablelink('address', 'Address')</th>
-      <th scope="col">Action</th>
+      <th scope="col" colspan="2">Action</th>
       {{-- end of column --}}
 
     </tr>
@@ -90,9 +81,11 @@
       <td id="address{{ $index + $customers->firstItem() }}">{{$customer->address}}
         <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
-      <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button> 
-        <!-- Modal -->
-          <div class="modal fade" id="detailModal{{ $customer->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+      <td>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button>
+      </td>
+          <!-- Modal -->
+          <div class="modal fade" id="detailModal{{ $customer->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >         
             <div class="modal-dialog modal-dialog-scrollable">
               <div class="modal-content">
                 <div class="modal-header">
@@ -101,40 +94,40 @@
                 </div>
                 <div class="modal-body">
                   @foreach ($customer->service->backrooms as $backroom)
-                    {{ $backroom->name }}
-                    <br>
-                    @foreach ($customer->statuses as $status)
-                        @if ($status->backroom_id == $backroom->id)
-                          @if ($status->name == 'Waiting to Process')
-                            Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
-                          @elseif ($status->name == 'Not Ready')
-                            Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
-                          @elseif ($status->name == 'Ready')
-                            Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
-                          @endif
-                          <br>
-                          Notes : {{ $status->information }}
-                        @endif
-                    @endforeach
+                        <div class="container">
+                          <h5>{{ $backroom->name }}</h5>
+                          <div class="row">
+                            @foreach ($customer->statuses as $status)
+                              @if ($status->backroom_id == $backroom->id)
+                                <div class="col">
+                                  @if ($status->name == 'Waiting to Process')
+                                  Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
+                                  @elseif ($status->name == 'Not Ready')
+                                    Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
+                                  @elseif ($status->name == 'Ready')
+                                    Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
+                                  @endif
+                                </div>
+                                <div class="col d-md-flex justify-content-md-end">
+                                  <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon> Edit</a>
+                                </div>
+                                <p>Notes : {{ $status->information }}</p>
+                              @endif
+                            @endforeach
+                          </div>
+                        </div>
                     <hr>
                   @endforeach
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><ion-icon name="checkmark-circle-outline"></ion-icon> Complete Task</button>
                 </div>
               </div>
             </div>
           </div>
           {{-- end of modal --}}
-          <a class="btn btn-warning"><ion-icon name="create-outline"></ion-icon></a>
-          <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('customer.destroy', $customer->id) }}" method="POST">
-          @csrf
-          @method('DELETE')
-          <button type="submit" class="btn btn-danger"><ion-icon name="trash-outline"></ion-icon></button> 
-          </form>
 
       </td>
-
       <?php $no++ ;?>
      
     </tr>
@@ -147,11 +140,9 @@
     </div>
     
     @endforelse
-
+    
   </tbody>
 </table>
-
- 
 
 {{-- pagination --}}
 {{ $customers->links() }}
@@ -160,5 +151,5 @@ Showing {{$customers->firstItem()}} to {{$customers->lastItem()}} of {{$customer
 <br>
 
 </div>
-@endcan
+
 @endsection

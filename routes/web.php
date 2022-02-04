@@ -1,8 +1,8 @@
 <?php
 
-//use App\Http\Controllers\CustomerRequestController;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +15,19 @@ use App\Http\Controllers\UserController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('Backroom.detail');
+Route::resource('customer', CustomerRequestController::class);
+Route::get('/customer', function(){
+    return redirect()->route('home');
+});
 
-});*/
+Route::get('/backroom', 'BackroomController@index')->middleware('permission:backroom')->name('backroom.index');
+Route::get('/backroom/{status}/edit', 'BackroomController@edit')->name('backroom.edit');
+Route::put('/backroom/{status}', 'BackroomController@update')->name('backroom.update');
 
-Route::resource('blog', BlogController::class);
-Route::resource('users', UserController::class);
+Auth::routes([
+    'register' => false, 
+    'reset' => false, 
+    'verify' => false,
+]);
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
