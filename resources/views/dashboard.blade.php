@@ -128,7 +128,7 @@
             </div>
           </div>
           {{-- end of modal --}}
-          <a class="btn btn-warning btn-primary-spacing btn-sm"><ion-icon name="create-outline"></ion-icon></a>
+          <a class="btn btn-warning btn-primary-spacing btn-sm" href="{{ route('customer.edit', $customer->id) }}"><ion-icon name="create-outline"></ion-icon></a>
           <a class="btn btn-danger btn-primary-spacing btn-sm"><ion-icon name="trash-outline"></ion-icon></a>
         </div>
 

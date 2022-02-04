@@ -14,22 +14,22 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-6">
-              <label>Bussiness Key</label>
+              <label class="p-2">Bussiness Key</label>
               <input class="form-control" id="" readonly="" value="MNI.4G_L2100_10_MHz.GIN114.1623318482865">
-              <label>Customer</label>
+              <label class="p-2">Customer</label>
               <input name="" class="form-control" id="" readonly="" value="{{ $status->customerRequests->name }}">
-              <label>Service</label>
+              <label class="p-2">Service</label>
               <input name="service" class="form-control" id="" readonly="" value="{{ $status->customerRequests->service->name }}">
-              <label>Notes</label>
+              <label class="p-2">Notes</label>
               <textarea name="information" class="form-control" id="" rows="4">{{ $status->information }}</textarea>
             </div>
             
             <div class="col-md-6">
-              <label>Bandwith</label>
+              <label class="p-2">Bandwith</label>
               <input class="form-control" id="" readonly="" value="123 MBps">
-              <label>Long Lat</label>
-              <input name="longlat" class="form-control" id="" readonly="" value="{{ $status->customerRequests->latlong }}"><br>
-          
+              <label class="p-2">Long Lat</label>
+              <input name="longlat" class="form-control" id="" readonly="" value="{{ $status->customerRequests->latlong }}">
+              <label class="p-2">Status</label>
               <div class="input-group">
                 <select class="form-control" name="name">
                 @foreach (["Waiting to Process" => "Waiting to Process", "Not Ready" => "Not Ready", "Ready" => "Ready" ] as $statuses => $name)
