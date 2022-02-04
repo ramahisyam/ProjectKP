@@ -16,11 +16,18 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::resource('customer', CustomerRequestController::class);
+Route::get('/customer', function(){
+    return redirect()->route('home');
+});
 
-Auth::routes();
+Route::get('/backroom', 'BackroomController@index')->middleware('permission:backroom')->name('backroom.index');
+Route::get('/backroom/{status}/edit', 'BackroomController@edit')->name('backroom.edit');
+Route::put('/backroom/{status}', 'BackroomController@update')->name('backroom.update');
+
+Auth::routes([
+    'register' => false, 
+    'reset' => false, 
+    'verify' => false,
+]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/customer', function(){
-    return redirect('/');
-});

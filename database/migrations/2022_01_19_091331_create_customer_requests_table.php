@@ -17,8 +17,7 @@ class CreateCustomerRequestsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('phoneNumber');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('latlong');
             $table->string('address');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->timestamps();

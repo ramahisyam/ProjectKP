@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServiceBackroomTable extends Migration
+class CreateBackroomServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateServiceBackroomTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_backroom', function (Blueprint $table) {
+        Schema::create('backroom_service', function (Blueprint $table) {
             $table->id();
             $table->foreignId('backroom_id')->constrained('backrooms')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
@@ -28,6 +28,6 @@ class CreateServiceBackroomTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_backroom');
+        Schema::dropIfExists('backroom_service');
     }
 }
