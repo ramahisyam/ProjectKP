@@ -62,6 +62,27 @@ class CustomerRequestController extends Controller
         $services = Service::all();
         return view('customer-request.edit', compact('customer', 'services'));
     }
+
+    /**
+     * * destroy
+     * *
+     * * @param  mixed $id
+     * * @return void
+     * */
+    
+    public function destroy($id)
+    {
+        $customers = CustomerRequest::findOrFail($id);
+        $customers->delete();
+        
+        if($customers){
+            //redirect dengan pesan sukses
+            return redirect()->route('home')->with(['success' => 'Data Berhasil Dihapus!']);
+       }else{
+           //redirect dengan pesan error
+           return redirect()->route('home')->with(['error' => 'Data Gagal Dihapus!']);
+       }
+   }    
     
     public function update(Request $request, CustomerRequest $customer)
     {

@@ -129,8 +129,11 @@
           </div>
           {{-- end of modal --}}
           <a class="btn btn-warning btn-primary-spacing btn-sm" href="{{ route('customer.edit', $customer->id) }}"><ion-icon name="create-outline"></ion-icon></a>
-          <a class="btn btn-danger btn-primary-spacing btn-sm"><ion-icon name="trash-outline"></ion-icon></a>
-        </div>
+          <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('customer.destroy', $customer->id) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger"><ion-icon name="trash-outline"></ion-icon></button> 
+          </form>
 
       </td>
 
