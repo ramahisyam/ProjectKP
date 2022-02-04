@@ -19,8 +19,8 @@
               <input class="form-control" id="" value="MNI.4G_L2100_10_MHz.GIN114.1623318482865">
               <label class="p-2">Customer</label>
               <input name="name" class="form-control" id="" value="{{ $customer->name }}">
-              <label class="p-2">Service</label>
-              <select class="form-select" name="service_id" id="" disabled>
+              {{-- <label class="p-2">Service</label>
+              <select class="form-select" name="service_id" id="">
                 @foreach ($services as $service)
                   <option value="{{ $service->id }}" 
                     @if ($service->id === $customer->service_id)
@@ -29,7 +29,7 @@
                     {{ $service->name }}
                   </option>
                 @endforeach
-              </select>
+              </select> --}}
               <label class="p-2">Address</label>
               <input name="address" class="form-control" id="" value="{{ $customer->address }}">
             </div>

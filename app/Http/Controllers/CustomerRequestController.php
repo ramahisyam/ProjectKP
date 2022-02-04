@@ -73,7 +73,6 @@ class CustomerRequestController extends Controller
             'phoneNumber' => $request->phoneNumber,
             'latlong' => $request->latlong,
             'address' => $request->address,
-            'service_id' => $request->service_id
         ]);
         // dd($customer);
 
