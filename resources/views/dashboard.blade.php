@@ -41,7 +41,7 @@
 
       {{-- start of column --}}
       <th scope="col">No.</th>
-      <th scope="col">Business Key</th>
+      <th scope="col">@sortablelink('id', 'Business Key')</th>
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>
@@ -59,7 +59,7 @@
       <?php $no=1;?>
       @forelse ($customers as $index=>$customer)
       <th scope="row"> {{ $index + $customers->firstItem() }} </th>
-      <td id="bussinessKey{{ $index + $customers->firstItem() }}">MNI.4G_L2100_10_MHz.GIN114.1623318482865
+      <td id="bussinessKey{{ $index + $customers->firstItem() }}">OLO{{$customer->id}}
         <button type="button" data-clipboard-target="#bussinessKey{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- businessKeyExample --}}
 
@@ -115,6 +115,9 @@
                           @endif
                           <br>
                           Notes : {{ $status->information }}
+                          <br>
+                          Evidence  : <a class="btn btn-info btn-sm rounded-pill" data-toggle="popover" data-img="https://avatarfiles.alphacoders.com/821/82166.png" title="Evidence" >Show Evidence</a>
+                          <a href="https://avatarfiles.alphacoders.com/821/82166.png" download class="btn btn-light btn-sm rounded-pill" target="_blank" rel="noopener noreferrer"><ion-icon name="download-outline"></ion-icon></a>
                         @endif
                     @endforeach
                     <hr>
@@ -156,7 +159,7 @@
  
 
 {{-- pagination --}}
-{{ $customers->links() }}
+{{ $customers->onEachSide(1)->links() }}
 Showing {{$customers->firstItem()}} to {{$customers->lastItem()}} of {{$customers->total()}} entries
 <br>
 <br>

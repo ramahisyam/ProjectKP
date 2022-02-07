@@ -23,7 +23,6 @@
     </div>
   </div>
   <hr>
-
   {{-- table --}}
 <table class="table table-striped table-bordered">
   <thead>
@@ -32,7 +31,7 @@
 
       {{-- start of column --}}
       <th scope="col">No.</th>
-      <th scope="col">Business Key</th>
+      <th scope="col">@sortablelink('id', 'Business Key')</th>
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>
@@ -50,7 +49,7 @@
       <?php $no=1;?>
       @forelse ($customers as $index=>$customer)
       <th scope="row"> {{ $index + $customers->firstItem() }} </th>
-      <td id="bussinessKey{{ $index + $customers->firstItem() }}">MNI.4G_L2100_10_MHz.GIN114.1623318482865
+      <td id="bussinessKey{{ $index + $customers->firstItem() }}">OLO{{$customer->id}}
         <button type="button" data-clipboard-target="#bussinessKey{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- businessKeyExample --}}
 

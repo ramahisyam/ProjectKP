@@ -97,5 +97,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        $(document).ready(function(){
+	        $('[data-toggle="popover"]').popover({
+                //trigger: 'focus',
+		        //trigger: 'hover',
+                html: true,
+                content: function () {
+				return '<img class="img-fluid" src="'+$(this).data('img') + '" />';
+                },
+                //title: 'Toolbox'
+            }) 
+        });
+    </script>
 </body>
 </html>

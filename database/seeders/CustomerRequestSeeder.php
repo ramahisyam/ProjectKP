@@ -19,7 +19,7 @@ class CustomerRequestSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
-        for ($i=0; $i <11 ; $i++) { 
+        for ($i=0; $i <1001 ; $i++) { 
             $customerRequest = CustomerRequest::create([
                 'name' => $faker->name,
                 'phoneNumber' => '08' . strval($faker->numerify('##########')),
