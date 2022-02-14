@@ -90,6 +90,10 @@ class RoleSeeder extends Seeder
             [
                 'name' => 'DSS',
                 'guard_name' => 'web'
+            ],
+            [
+                'name' => 'superAdmin',
+                'guard_name' => 'web'
             ]
         ];
         

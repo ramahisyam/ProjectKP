@@ -35,4 +35,9 @@ class CustomerRequest extends Model
     {
         return $this->hasMany(BackroomStatus::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

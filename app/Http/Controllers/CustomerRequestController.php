@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Backroom;
 use Illuminate\Http\Request;
 use App\Models\CustomerRequest;
 use App\Models\Service;
 use App\Models\BackroomStatus;
 use Axiom\Rules\LocationCoordinates;
+use Illuminate\Support\Facades\DB;
 
 class CustomerRequestController extends Controller
 {
@@ -17,8 +19,9 @@ class CustomerRequestController extends Controller
 
     public function create() {
         $services = Service::all();
+        $witels = Backroom::where('name', 'like', 'Witel%')->get();
 
-        return view('customer-request.add', compact('services'));
+        return view('customer-request.add', compact('services', 'witels'));
 
     }
 
@@ -28,7 +31,8 @@ class CustomerRequestController extends Controller
             'phoneNumber' => 'required|digits_between:1,13',
             'latlong' => ['required', new LocationCoordinates],
             'address' => 'required|max:255',
-            'service_id' => 'required|exists:services,id'
+            'service_id' => 'required|exists:services,id',
+            'bandwidth' => 'required|digits_between:1,3',
         ]);
 
         $customerRequest = CustomerRequest::create([
@@ -36,8 +40,20 @@ class CustomerRequestController extends Controller
             'phoneNumber' => $request->phoneNumber,
             'latlong' => $request->latlong,
             'address' => $request->address,
-            'service_id' => $request->service_id
+            'service_id' => $request->service_id,
+            'bandwidth' => $request->bandwidth . ' ' . $request->unit,
+            'user_id' => auth()->user()->id
         ]);
+
+        foreach ($request->witel as $item => $value) {
+            $backroomServices = array( 
+                'service_id' => $request->service_id,
+                'backroom_id' => $value,
+                'customer_request_id' => $customerRequest->id
+            );
+            DB::table('backroom_service')->insert($backroomServices);
+        }
+        // dd($backroomServices);
 
         $customers = $customerRequest->service->backrooms;
 

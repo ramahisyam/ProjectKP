@@ -17,6 +17,7 @@ class CreateBackroomServiceTable extends Migration
             $table->id();
             $table->foreignId('backroom_id')->constrained('backrooms')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
+            $table->foreignId('customer_request_id')->constrained('customer_requests')->onDelete('cascade');
             $table->timestamps();
         });
     }

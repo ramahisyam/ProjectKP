@@ -26,7 +26,9 @@ class CustomerRequestSeeder extends Seeder
                 'latlong' => strval($faker->numberBetween(0,99)) . '.' . strval($faker->randomNumber() . ', ' 
                 . $faker->numberBetween(0,99)) . '.' . strval($faker->randomNumber()),
                 'address' => $faker->address,
+                'bandwidth' => strval($faker->numberBetween(0,999)) . ' GB',
                 'service_id' => $faker->numberBetween(1,2),
+                'user_id' => 3,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
