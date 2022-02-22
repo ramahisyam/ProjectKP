@@ -25,12 +25,12 @@ class Backroom extends Model
         
     }
 
-    public function status() {
-        return $this->hasOne(BackroomStatus::class);
+    public function statuses() {
+        return $this->belongsToMany(BackroomStatus::class);
     }
     
-    public function services()
-    {
-        return $this->belongsToMany(Service::class);
-    }
+    // public function customerRequests()
+    // {
+    //     return $this->belongsToMany(CustomerRequest::class);
+    // }
 }

@@ -21,6 +21,7 @@ class CustomerRequestSeeder extends Seeder
         $faker = Faker::create('id_ID');
         for ($i=0; $i <11 ; $i++) { 
             $customerRequest = CustomerRequest::create([
+                'business_key' => 'OLO/' . random_int(100000, 999999),
                 'name' => $faker->name,
                 'phoneNumber' => '08' . strval($faker->numerify('##########')),
                 'latlong' => strval($faker->numberBetween(0,99)) . '.' . strval($faker->randomNumber() . ', ' 

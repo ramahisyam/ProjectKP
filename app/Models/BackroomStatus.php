@@ -15,7 +15,7 @@ class BackroomStatus extends Model
         return $this->belongsTo(CustomerRequest::class, 'customer_request_id');
     }
 
-    public function backrooms() {
+    public function backroom() {
         return $this->belongsTo(Backroom::class, 'backroom_id');
     }
 }

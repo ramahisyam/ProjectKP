@@ -17,8 +17,8 @@ class Service extends Model
         return $this->hasMany(CustomerRequest::class);
     }
 
-    public function backrooms()
-    {
-        return $this->belongsToMany(Backroom::class);
-    }
+    // public function backrooms()
+    // {
+    //     return $this->belongsToMany(Backroom::class);
+    // }
 }

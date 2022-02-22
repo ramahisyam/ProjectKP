@@ -34,7 +34,6 @@ class HomeController extends Controller
         $customers = CustomerRequest::sortable()
         ->latest()
         ->filter(request(['search']))
-        ->with('service.backrooms')
         ->with('statuses')
         ->paginate(10);
 

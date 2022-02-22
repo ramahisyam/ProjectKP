@@ -93,29 +93,29 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  @foreach ($customer->service->backrooms as $backroom)
-                        <div class="container">
-                          <h5>{{ $backroom->name }}</h5>
-                          <div class="row">
-                            @foreach ($customer->statuses as $status)
-                              @if ($status->backroom_id == $backroom->id)
-                                <div class="col">
-                                  @if ($status->name == 'Waiting to Process')
-                                  Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
-                                  @elseif ($status->name == 'Not Ready')
-                                    Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
-                                  @elseif ($status->name == 'Ready')
-                                    Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
-                                  @endif
-                                </div>
-                                <div class="col d-md-flex justify-content-md-end">
-                                  <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon> Edit</a>
-                                </div>
-                                <p>Notes : {{ $status->information }}</p>
-                              @endif
-                            @endforeach
-                          </div>
+                  @foreach ($customer->statuses as $status)
+                    <div class="container">
+                      <h5>{{ $status->backroom->name }}</h5>
+                      <div class="row">
+                        <div class="col">
+                          @if ($status->name == 'Waiting to Process')
+                          Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
+                          @elseif ($status->name == 'Not Ready')
+                            Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
+                          @elseif ($status->name == 'Ready')
+                            Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
+                          @endif
                         </div>
+                        <div class="col d-md-flex justify-content-md-end">
+                          <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon> Edit</a>
+                        </div>
+                        <p>Notes : {{ $status->information }}</p>
+                        {{-- @foreach ($customer->statuses as $status) --}}
+                          {{-- @if ($status->backroom_id == $backroom->id) --}}
+                          {{-- @endif --}}
+                        {{-- @endforeach --}}
+                      </div>
+                    </div>
                     <hr>
                   @endforeach
                 </div>

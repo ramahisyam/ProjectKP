@@ -35,7 +35,8 @@ class CustomerRequestController extends Controller
             'bandwidth' => 'required|digits_between:1,3',
         ]);
 
-        $customerRequest = CustomerRequest::create([
+        $customer = CustomerRequest::create([
+            'business_key' => 'OLO/' . random_int(100000, 999999),
             'name' => $request->name,
             'phoneNumber' => $request->phoneNumber,
             'latlong' => $request->latlong,
@@ -46,23 +47,10 @@ class CustomerRequestController extends Controller
         ]);
 
         foreach ($request->witel as $item => $value) {
-            $backroomServices = array( 
-                'service_id' => $request->service_id,
-                'backroom_id' => $value,
-                'customer_request_id' => $customerRequest->id
-            );
-            DB::table('backroom_service')->insert($backroomServices);
-        }
-        // dd($backroomServices);
-
-        $customers = $customerRequest->service->backrooms;
-
-        foreach ($customers as $customer) {
             BackroomStatus::create([
-                'customer_request_id' => $customerRequest->id,
-                'backroom_id' => $customer->id,
+                'customer_request_id' => $customer->id,
+                'backroom_id' => $value,
                 'name' => 'Waiting to Process',
-                'information' => 'No info'
             ]);
         }
 

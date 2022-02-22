@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Backroom;
 use App\Models\BackroomStatus;
 use Illuminate\Http\Request;
 use App\Models\CustomerRequest;
@@ -19,12 +20,16 @@ class BackroomController extends Controller
         $user = auth()->user();
         // dd($user->getRoleNames());
         if ($user->can('backroom')) {
-            $customers = CustomerRequest::sortable()->filter(request(['search']))->with(['service.backrooms' => function ($query) use ($user){
-                $query->whereIn('name', $user->getRoleNames());
-            }])->whereHas('service.backrooms', function($query) use ($user){
-                $query->whereIn('name', $user->getRoleNames());
-            })->paginate(10);
-            // dd($customers);
+            $backroom = Backroom::where('name', $user->getRoleNames()[0])->first();
+            $customers = CustomerRequest::sortable()->filter(request(['search']))
+            ->with(['statuses' => function ($query) use ($backroom){
+                $query->where('backroom_id', $backroom->id);
+            }])
+            ->whereHas('statuses', function($query) use ($backroom){
+                $query->where('backroom_id', $backroom->id);
+            })
+            ->paginate(10);
+            // dd($customers->toArray());
             return view('backroom.dashboard', compact('customers', 'user'));
         }
     }

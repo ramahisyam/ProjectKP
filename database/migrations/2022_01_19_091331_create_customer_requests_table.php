@@ -15,6 +15,7 @@ class CreateCustomerRequestsTable extends Migration
     {
         Schema::create('customer_requests', function (Blueprint $table) {
             $table->id();
+            $table->string('business_key');
             $table->string('name');
             $table->string('phoneNumber');
             $table->string('latlong');
