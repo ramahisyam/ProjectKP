@@ -59,7 +59,7 @@
       <?php $no=1;?>
       @forelse ($customers as $index=>$customer)
       <th scope="row"> {{ $index + $customers->firstItem() }} </th>
-      <td id="bussinessKey{{ $index + $customers->firstItem() }}">MNI.4G_L2100_10_MHz.GIN114.1623318482865
+      <td id="bussinessKey{{ $index + $customers->firstItem() }}">{{ $customer->business_key }}
         <button type="button" data-clipboard-target="#bussinessKey{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- businessKeyExample --}}
 
@@ -75,7 +75,7 @@
         <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
-      <td id="bandwith{{ $index + $customers->firstItem() }}">123 MBps
+      <td id="bandwith{{ $index + $customers->firstItem() }}">{{ $customer->bandwidth }}
         <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- bandwithExample --}}
 
@@ -101,22 +101,20 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  @foreach ($customer->service->backrooms as $backroom)
-                    {{ $backroom->name }}
+                  @foreach ($customer->statuses as $backroom)
+                    {{ $backroom->backroom->name }}
                     <br>
-                    @foreach ($customer->statuses as $status)
-                        @if ($status->backroom_id == $backroom->id)
-                          @if ($status->name == 'Waiting to Process')
-                            Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
-                          @elseif ($status->name == 'Not Ready')
-                            Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
-                          @elseif ($status->name == 'Ready')
-                            Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
-                          @endif
-                          <br>
-                          Notes : {{ $status->information }}
-                        @endif
-                    @endforeach
+                    @if ($backroom->customer_request_id == $customer->id)
+                      @if ($backroom->name == 'Waiting to Process')
+                        Status  : <span class="badge rounded-pill bg-secondary">{{ $backroom->name }}</span>
+                      @elseif ($backroom->name == 'Not Ready')
+                        Status  : <span class="badge rounded-pill bg-danger">{{ $backroom->name }}</span>
+                      @elseif ($backroom->name == 'Ready')
+                        Status  : <span class="badge rounded-pill bg-success">{{ $backroom->name }}</span>
+                      @endif
+                      <br>
+                      Notes : {{ $backroom->information }}
+                    @endif
                     <hr>
                   @endforeach
                 </div>

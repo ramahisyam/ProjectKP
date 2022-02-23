@@ -21,12 +21,15 @@ class CustomerRequestSeeder extends Seeder
         $faker = Faker::create('id_ID');
         for ($i=0; $i <11 ; $i++) { 
             $customerRequest = CustomerRequest::create([
+                'business_key' => 'OLO/' . random_int(100000, 999999),
                 'name' => $faker->name,
                 'phoneNumber' => '08' . strval($faker->numerify('##########')),
                 'latlong' => strval($faker->numberBetween(0,99)) . '.' . strval($faker->randomNumber() . ', ' 
                 . $faker->numberBetween(0,99)) . '.' . strval($faker->randomNumber()),
                 'address' => $faker->address,
+                'bandwidth' => strval($faker->numberBetween(0,999)) . ' GB',
                 'service_id' => $faker->numberBetween(1,2),
+                'user_id' => 3,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);

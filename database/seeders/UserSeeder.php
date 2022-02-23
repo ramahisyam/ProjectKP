@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -14,9 +15,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create('id_ID');
+
         $mso = User::create([
-            'name' => 'Rama',
+            'name' => 'MSO',
             'email' => 'mso.telkom@telkom.co.id',
+            'phoneNumber' => '08' . strval($faker->numerify('##########')),
             'password' => bcrypt('123456789'),
         ]);
 
@@ -24,8 +28,9 @@ class UserSeeder extends Seeder
         $mso->givePermissionTo('backroom');
 
         $witel2 = User::create([
-            'name' => 'Rama Hisyam',
+            'name' => 'Witel 2',
             'email' => 'witel2.telkom@telkom.co.id',
+            'phoneNumber' => '08' . strval($faker->numerify('##########')),
             'password' => bcrypt('123456789'),
         ]);
 
@@ -35,11 +40,20 @@ class UserSeeder extends Seeder
         $am = User::create([
             'name' => 'Account Manager',
             'email' => 'am.telkom@telkom.co.id',
+            'phoneNumber' => '08' . strval($faker->numerify('##########')),
             'password' => bcrypt('123456789'),
         ]);
 
         $am->assignRole('AM');
         $am->givePermissionTo('input customer request');
         $am->givePermissionTo('customer');
+
+        $superAdmin = User::create([
+            'name' => 'Admin',
+            'email' => 'admin.telkom@telkom.co.id',
+            'phoneNumber' => '08' . strval($faker->numerify('##########')),
+            'password' => bcrypt('123456789'),
+        ]);
+        $superAdmin->assignRole('superAdmin');
     }
 }

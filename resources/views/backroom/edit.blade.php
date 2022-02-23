@@ -15,7 +15,7 @@
           <div class="row">
             <div class="col-md-6">
               <label class="p-2">Bussiness Key</label>
-              <input class="form-control" id="" readonly="" value="MNI.4G_L2100_10_MHz.GIN114.1623318482865">
+              <input class="form-control" id="" readonly="" value="{{ $status->customerRequests->business_key }}">
               <label class="p-2">Customer</label>
               <input name="" class="form-control" id="" readonly="" value="{{ $status->customerRequests->name }}">
               <label class="p-2">Service</label>
@@ -26,7 +26,7 @@
             
             <div class="col-md-6">
               <label class="p-2">Bandwith</label>
-              <input class="form-control" id="" readonly="" value="123 MBps">
+              <input class="form-control" id="" readonly="" value="{{ $status->customerRequests->bandwidth }}">
               <label class="p-2">Long Lat</label>
               <input name="longlat" class="form-control" id="" readonly="" value="{{ $status->customerRequests->latlong }}">
               <label class="p-2">Status</label>

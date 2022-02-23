@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            BackroomSeeder::class,
-            ServiceSeeder::class,
             PermissionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
-            BackroomServiceSeeder::class,
-            CustomerRequestSeeder::class
+            BackroomSeeder::class,
+            ServiceSeeder::class
+            // CustomerRequestSeeder::class,
+            // BackroomServiceSeeder::class
         ]);
     }
 }
