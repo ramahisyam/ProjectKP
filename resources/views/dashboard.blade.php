@@ -116,8 +116,8 @@
                           <br>
                           Notes : {{ $status->information }}
                           <br>
-                          Evidence  : <a class="btn btn-info btn-sm rounded-pill" data-toggle="popover" data-img="https://avatarfiles.alphacoders.com/821/82166.png" title="Evidence" >Show Evidence</a>
-                          <a href="https://avatarfiles.alphacoders.com/821/82166.png" download class="btn btn-light btn-sm rounded-pill" target="_blank" rel="noopener noreferrer"><ion-icon name="download-outline"></ion-icon></a>
+                          Evidence  : <a class="btn btn-info btn-sm rounded-pill" data-toggle="popover" data-img="https://i.pinimg.com/originals/d0/5b/e1/d05be16718dd01da9acb911e32d4136d.jpg" title="Evidence" >Show Evidence</a>
+                          <a href="https://i.pinimg.com/originals/d0/5b/e1/d05be16718dd01da9acb911e32d4136d.jpg" download class="btn btn-light btn-sm rounded-pill" target="_blank" rel="noopener noreferrer"><ion-icon name="download-outline"></ion-icon></a>
                         @endif
                     @endforeach
                     <hr>
