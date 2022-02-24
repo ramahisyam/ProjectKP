@@ -6,6 +6,7 @@ use App\Models\Backroom;
 use App\Models\BackroomStatus;
 use Illuminate\Http\Request;
 use App\Models\CustomerRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
 
 class BackroomController extends Controller
@@ -42,10 +43,27 @@ class BackroomController extends Controller
     public function update(Request $request, BackroomStatus $status)
     {
         $status = BackroomStatus::findOrFail($status->id);
-        $status->update([
-            'name' => $request->name,
-            'information' => $request->information,
+        $this->validate($request, [
+            'image' => 'image|mimes:png,jpg,jpeg'
         ]);
+
+        if ($request->file('image') == "") {
+            $status->update([
+                'name' => $request->name,
+                'information' => $request->information,
+            ]);
+        } else {
+            Storage::disk('local')->delete('public/backroomStatuses/'.$status->image);
+
+            $image = $request->file('image');
+            $image->storeAs('public/backroomStatuses', $image->hashName());
+
+            $status->update([
+                'image'     => $image->hashName(),
+                'name' => $request->name,
+                'information' => $request->information,
+            ]);
+        }
 
         if ($status) {
             return redirect()->route('backroom.index')->with(['success' => 'Data Berhasil Disimpan']);

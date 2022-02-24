@@ -33,10 +33,21 @@
               <div class="input-group">
                 <select class="form-control" name="name">
                 @foreach (["Waiting to Process" => "Waiting to Process", "Not Ready" => "Not Ready", "Ready" => "Ready" ] as $statuses => $name)
-                  <option value="{{ $statuses }}" {{ old("status", $status->name)}}>{{ $name }}</option>
+                  @if (old('name') == $statuses)
+                    <option value="{{ $statuses }}" selected>{{ $name }}</option>
+                  @else
+                    <option value="{{ $statuses }}">{{ $name }}</option>
+                  @endif
                 @endforeach
                 </select>
               </div>
+              <label class="p-2">Foto</label>
+              <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+              @error('image')
+                <div class="alert alert-danger mt-2">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
         </div>

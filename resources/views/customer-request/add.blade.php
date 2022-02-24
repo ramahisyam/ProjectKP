@@ -56,7 +56,7 @@
                     <select name="service_id" class="form-select @error('service_id') is-invalid @enderror" aria-label="Default select example">
                       <option>-----Pilih service-----</option>  
                       @foreach ($services as $service)
-                        <option value="{{ $service->id }}">{{ $service->name }}</option>
+                        <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>{{ $service->name }}</option>
                       @endforeach
                     </select>
                     @error('service_id')
@@ -102,8 +102,8 @@
             <div class="row mb-3">
               <label for="inputEmail3" class="col-sm-2 col-form-label">No Telp. AM</label>
               <div class="col-sm-10">
-                <input name="amPhoneNumber" type="tel" class="form-control @error('phoneNumber') is-invalid @enderror" id="inputEmail3" placeholder="" value="{{ Auth::user()->phoneNumber }}" readonly>
-                @error('phoneNumber')
+                <input name="amPhoneNumber" type="tel" class="form-control @error('amPhoneNumber') is-invalid @enderror" id="inputEmail3" placeholder="" value="{{ Auth::user()->phoneNumber }}" readonly>
+                @error('amPhoneNumber')
                   <div class="alert alert-danger mt-2">
                     {{ $message }}
                   </div>
@@ -116,13 +116,17 @@
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Witel A</label>
                 <div class="col-sm-10">
-                  <select name="witel[]" class="form-select @error('witelA') is-invalid @enderror">
+                  <select name="witel[]" class="form-select @error('witel') is-invalid @enderror">
                     <option>-----Pilih Witel-----</option>  
                     @foreach ($witels as $witel)
-                      <option value="{{ $witel->id }}">{{ $witel->name }}</option>
+                      @if (old('witel'))
+                        <option value="{{ $witel->id }}" {{ in_array($witel->id, old('witel')) ? 'selected' : '' }}>{{ $witel->name }}</option>
+                      @else
+                        <option value="{{ $witel->id }}">{{ $witel->name }}</option>  
+                      @endif
                     @endforeach
                   </select>
-                  @error('service_id')
+                  @error('witel')
                     <div class="alert alert-danger mt-2">
                       {{ $message }}
                     </div>
