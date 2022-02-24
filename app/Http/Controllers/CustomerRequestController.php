@@ -9,6 +9,7 @@ use App\Models\Service;
 use App\Models\BackroomStatus;
 use Axiom\Rules\LocationCoordinates;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class CustomerRequestController extends Controller
 {
@@ -33,6 +34,12 @@ class CustomerRequestController extends Controller
             'address' => 'required|max:255',
             'service_id' => 'required|exists:services,id',
             'bandwidth' => 'required|digits_between:1,3',
+            // 'witel' => [
+            //     'required',
+            //     Rule::exists('statuses')->where(function ($query) {
+            //         return $query->where('backroom_id', 2);
+            //     })
+            //     ]
         ]);
 
         $customer = CustomerRequest::create([
