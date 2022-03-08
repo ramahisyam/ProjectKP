@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Backroom;
 use App\Models\BackroomStatus;
 use App\Models\CustomerRequest;
+use App\Events\BackroomNotification;
 
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -39,6 +40,7 @@ class HomeController extends Controller
 
         if ($user->hasRole('AM')) {
             return view('dashboard', compact('customers'));
+            event(new BackroomNotification('data baru masuk'));
         } else {
             return redirect()->route('backroom.index');
         }

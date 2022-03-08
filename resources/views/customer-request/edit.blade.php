@@ -16,10 +16,10 @@
           <div class="row">
             <div class="col-md-6">
               <label class="p-2">Bussiness Key</label>
-              <input class="form-control" id="" value="MNI.4G_L2100_10_MHz.GIN114.1623318482865">
+              <input class="form-control" id="" value="{{ $customer->business_key }}" readonly>
               <label class="p-2">Customer</label>
               <input name="name" class="form-control" id="" value="{{ $customer->name }}">
-              {{-- <label class="p-2">Service</label>
+              <label class="p-2">Service</label>
               <select class="form-select" name="service_id" id="">
                 @foreach ($services as $service)
                   <option value="{{ $service->id }}" 
@@ -29,14 +29,14 @@
                     {{ $service->name }}
                   </option>
                 @endforeach
-              </select> --}}
+              </select>
               <label class="p-2">Address</label>
               <input name="address" class="form-control" id="" value="{{ $customer->address }}">
             </div>
             
             <div class="col-md-6">
               <label class="p-2">Bandwith</label>
-              <input class="form-control" id="" value="123 MBps">
+              <input class="form-control" id="" value="{{ $customer->bandwidth }}">
               <label class="p-2">Latlong</label>
               <input name="latlong" class="form-control" id="" value="{{ $customer->latlong }}">
               <label class="p-2">Phone Number</label>

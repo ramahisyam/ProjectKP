@@ -132,7 +132,17 @@
           <a class="btn btn-warning btn-primary-spacing btn-sm" href="{{ route('customer.edit', $customer->id) }}"><ion-icon name="create-outline"></ion-icon></a>
           <button type="submit" class="btn btn-danger btn-primary-spacing btn-sm"><ion-icon name="trash-outline"></ion-icon></button> 
           </form>
-
+          @foreach ($customer->statuses as $backroom)
+            @if ($backroom->customer_request_id == $customer->id)
+              @if ($backroom->name == 'Waiting to Process')
+                <span class="badge rounded-pill bg-secondary">{{ $backroom->backroom->name }}</span>
+              @elseif ($backroom->name == 'Not Ready')
+                <span class="badge rounded-pill bg-danger">{{ $backroom->backroom->name }}</span>
+              @elseif ($backroom->name == 'Ready')
+                <span class="badge rounded-pill bg-success">{{ $backroom->backroom->name }}</span>
+              @endif
+            @endif
+          @endforeach
       </td>
 
       <?php $no++ ;?>

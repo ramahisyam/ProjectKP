@@ -24,10 +24,6 @@ Route::get('/backroom', 'BackroomController@index')->middleware('permission:back
 Route::get('/backroom/{status}/edit', 'BackroomController@edit')->name('backroom.edit');
 Route::put('/backroom/{status}', 'BackroomController@update')->name('backroom.update');
 
-Auth::routes([
-    'register' => false, 
-    'reset' => false, 
-    'verify' => false,
-]);
+Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

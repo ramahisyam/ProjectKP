@@ -33,11 +33,12 @@
               <div class="input-group">
                 <select class="form-control" name="name">
                 @foreach (["Waiting to Process" => "Waiting to Process", "Not Ready" => "Not Ready", "Ready" => "Ready" ] as $statuses => $name)
-                  @if (old('name') == $statuses)
-                    <option value="{{ $statuses }}" selected>{{ $name }}</option>
-                  @else
-                    <option value="{{ $statuses }}">{{ $name }}</option>
-                  @endif
+                  <option value="{{ $statuses }}" 
+                  @if ($statuses === $status->name)
+                    selected
+                  @endif>
+                    {{ $name }}
+                  </option>
                 @endforeach
                 </select>
               </div>
