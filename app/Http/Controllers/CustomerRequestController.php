@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BackroomNotification;
 use App\Models\Backroom;
 use Illuminate\Http\Request;
 use App\Models\CustomerRequest;
