@@ -15,11 +15,14 @@ class CreateCustomerRequestsTable extends Migration
     {
         Schema::create('customer_requests', function (Blueprint $table) {
             $table->id();
+            $table->string('business_key');
             $table->string('name');
             $table->string('phoneNumber');
             $table->string('latlong');
             $table->string('address');
+            $table->string('bandwidth');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class CustomerRequest extends Model
     use Sortable;
 
     protected $guarded = [];
-    public $sortable = ['id', 'name', 'service_id', 'created_at', 'updated_at', 'address', 'phoneNumber', 'latlong'];
+    public $sortable = ['business_key', 'name', 'service_id', 'bandwidth', 'created_at', 'updated_at', 'address', 'phoneNumber', 'latlong'];
 
     public function scopeFilter($query, array $filters){
 
@@ -22,7 +22,10 @@ class CustomerRequest extends Model
             return $query->where('name', 'like', '%' . $search . '%')
                          ->orWhere('phoneNumber', 'like', '%' . $search . '%')
                          ->orWhere('created_at', 'like', '%' . $search . '%')
-                         ->orWhere('address', 'like', '%' . $search . '%');
+                         ->orWhere('address', 'like', '%' . $search . '%')
+                         ->orWhere('business_key', 'like', '%' . $search . '%')
+                         ->orWhere('bandwidth', 'like', '%' . $search . '%');
+
         });
         
     }
@@ -34,5 +37,10 @@ class CustomerRequest extends Model
     public function statuses()
     {
         return $this->hasMany(BackroomStatus::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

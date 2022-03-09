@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+@can('backroom')
+<div id="app">
+        
+</div>
 <br>
 <div class="container">
   <div class="row">
@@ -49,7 +53,7 @@
       <?php $no=1;?>
       @forelse ($customers as $index=>$customer)
       <th scope="row"> {{ $index + $customers->firstItem() }} </th>
-      <td id="bussinessKey{{ $index + $customers->firstItem() }}">OLO{{$customer->id}}
+      <td id="bussinessKey{{ $index + $customers->firstItem() }}">{{ $customer->business_key }}
         <button type="button" data-clipboard-target="#bussinessKey{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- businessKeyExample --}}
 
@@ -65,7 +69,7 @@
         <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
-      <td id="bandwith{{ $index + $customers->firstItem() }}">123 MBps
+      <td id="bandwith{{ $index + $customers->firstItem() }}">{{ $customer->bandwidth }}
         <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- bandwithExample --}}
 
@@ -81,7 +85,26 @@
         <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
       <td>
-        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button>
+        {{-- <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button> --}}
+        @foreach ($customer->statuses as $status)
+          <div class="container">
+            <div class="row">
+              <div class="col d-md-flex">
+                <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon>Edit</a>
+              </div>
+              <br>
+              <div class="col">
+                @if ($status->name == 'Waiting to Process')
+                <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
+                @elseif ($status->name == 'Not Ready')
+                <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
+                @elseif ($status->name == 'Ready')
+                <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
+                @endif
+              </div>
+            </div>
+          </div>
+        @endforeach
       </td>
           <!-- Modal -->
           <div class="modal fade" id="detailModal{{ $customer->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >         
@@ -92,31 +115,6 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  @foreach ($customer->service->backrooms as $backroom)
-                        <div class="container">
-                          <h5>{{ $backroom->name }}</h5>
-                          <div class="row">
-                            @foreach ($customer->statuses as $status)
-                              @if ($status->backroom_id == $backroom->id)
-                                <div class="col">
-                                  @if ($status->name == 'Waiting to Process')
-                                  Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
-                                  @elseif ($status->name == 'Not Ready')
-                                    Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
-                                  @elseif ($status->name == 'Ready')
-                                    Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
-                                  @endif
-                                </div>
-                                <div class="col d-md-flex justify-content-md-end">
-                                  <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon> Edit</a>
-                                </div>
-                                <p>Notes : {{ $status->information }}</p>
-                              @endif
-                            @endforeach
-                          </div>
-                        </div>
-                    <hr>
-                  @endforeach
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
@@ -151,4 +149,5 @@ Showing {{$customers->firstItem()}} to {{$customers->lastItem()}} of {{$customer
 
 </div>
 
+@endcan
 @endsection

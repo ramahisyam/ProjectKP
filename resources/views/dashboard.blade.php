@@ -45,7 +45,7 @@
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>
-      <th scope="col">Bandwith</th>
+      <th scope="col">@sortablelink('bandwidth', 'Bandwidth')</th>
       <th scope="col">@sortablelink('created_at', 'Created At')</th>
       <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
       <th scope="col">@sortablelink('address', 'Address')</th>
@@ -59,7 +59,7 @@
       <?php $no=1;?>
       @forelse ($customers as $index=>$customer)
       <th scope="row"> {{ $index + $customers->firstItem() }} </th>
-      <td id="bussinessKey{{ $index + $customers->firstItem() }}">OLO{{$customer->id}}
+      <td id="bussinessKey{{ $index + $customers->firstItem() }}">{{ $customer->business_key }}
         <button type="button" data-clipboard-target="#bussinessKey{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- businessKeyExample --}}
 
@@ -75,7 +75,7 @@
         <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
-      <td id="bandwith{{ $index + $customers->firstItem() }}">123 MBps
+      <td id="bandwith{{ $index + $customers->firstItem() }}">{{ $customer->bandwidth }}
         <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- bandwithExample --}}
 
@@ -101,25 +101,24 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  @foreach ($customer->service->backrooms as $backroom)
-                    {{ $backroom->name }}
+                  @foreach ($customer->statuses as $backroom)
+                    {{ $backroom->backroom->name }}
                     <br>
-                    @foreach ($customer->statuses as $status)
-                        @if ($status->backroom_id == $backroom->id)
-                          @if ($status->name == 'Waiting to Process')
-                            Status  : <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
-                          @elseif ($status->name == 'Not Ready')
-                            Status  : <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
-                          @elseif ($status->name == 'Ready')
-                            Status  : <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
-                          @endif
-                          <br>
-                          Notes : {{ $status->information }}
-                          <br>
-                          Evidence  : <a class="btn btn-info btn-sm rounded-pill" data-toggle="popover" data-img="https://i.pinimg.com/originals/d0/5b/e1/d05be16718dd01da9acb911e32d4136d.jpg" title="Evidence" >Show Evidence</a>
-                          <a href="https://i.pinimg.com/originals/d0/5b/e1/d05be16718dd01da9acb911e32d4136d.jpg" download class="btn btn-light btn-sm rounded-pill" target="_blank" rel="noopener noreferrer"><ion-icon name="download-outline"></ion-icon></a>
-                        @endif
-                    @endforeach
+                    @if ($backroom->customer_request_id == $customer->id)
+                      @if ($backroom->name == 'Waiting to Process')
+                        Status  : <span class="badge rounded-pill bg-secondary">{{ $backroom->name }}</span>
+                      @elseif ($backroom->name == 'Not Ready')
+                        Status  : <span class="badge rounded-pill bg-danger">{{ $backroom->name }}</span>
+                      @elseif ($backroom->name == 'Ready')
+                        Status  : <span class="badge rounded-pill bg-success">{{ $backroom->name }}</span>
+                      @endif
+                      <br>
+                      Notes : {{ $backroom->information }}
+                      <br>
+                      {{-- <button type="button" class="btn btn-primary" data-toggle="popover" title="User Info">Popover with Title</button> --}}
+                      Evidence  : <a class="btn btn-info btn-sm rounded-pill" data-toggle="popover" data-img="{{ Storage::url('public/backroomStatuses/'.$backroom->image) }}" title="Evidence" >Show Evidence</a>
+                      <a href="{{ Storage::url('public/backroomStatuses/'.$backroom->image) }}" download class="btn btn-light btn-sm rounded-pill" target="_blank" rel="noopener noreferrer"><ion-icon name="download-outline"></ion-icon></a>
+                    @endif
                     <hr>
                   @endforeach
                 </div>
@@ -137,7 +136,17 @@
           <a class="btn btn-warning btn-primary-spacing btn-sm" href="{{ route('customer.edit', $customer->id) }}"><ion-icon name="create-outline"></ion-icon></a>
           <button type="submit" class="btn btn-danger btn-primary-spacing btn-sm"><ion-icon name="trash-outline"></ion-icon></button> 
           </form>
-
+          @foreach ($customer->statuses as $backroom)
+            @if ($backroom->customer_request_id == $customer->id)
+              @if ($backroom->name == 'Waiting to Process')
+                <span class="badge rounded-pill bg-secondary">{{ $backroom->backroom->name }}</span>
+              @elseif ($backroom->name == 'Not Ready')
+                <span class="badge rounded-pill bg-danger">{{ $backroom->backroom->name }}</span>
+              @elseif ($backroom->name == 'Ready')
+                <span class="badge rounded-pill bg-success">{{ $backroom->backroom->name }}</span>
+              @endif
+            @endif
+          @endforeach
       </td>
 
       <?php $no++ ;?>
