@@ -20,7 +20,7 @@ class BackroomStatusSeeder extends Seeder
             for ($i=1; $i <=5 ; $i++) { 
                 BackroomStatus::create([
                     'customer_request_id' => $i,
-                    'backroom_id' => $faker->numberBetween(1,18),
+                    'backroom_id' => $faker->numberBetween(3,15),
                     'name' => 'Waiting to Process',
                 ]);
             }

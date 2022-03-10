@@ -90,9 +90,11 @@
         @foreach ($customer->statuses as $status)
           <div class="container">
             <div class="row">
-              <div class="col d-md-flex">
+              <div class="col">
                 <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon> Edit</a>
               </div>
+            </div>
+            <div class="row">
               <div class="col">
                 @if ($status->name == 'Waiting to Process')
                 <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>

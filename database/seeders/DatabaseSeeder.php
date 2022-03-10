@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             BackroomSeeder::class,
             ServiceSeeder::class,
+            BackroomServiceSeeder::class,
             CustomerRequestSeeder::class,
             BackroomStatusSeeder::class,
             CustomerSeeder::class

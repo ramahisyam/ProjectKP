@@ -20,7 +20,7 @@ class CustomerRequestSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
         for ($i=1; $i <=5 ; $i++) { 
-            CustomerRequest::create([
+            $customerRequest = CustomerRequest::create([
                 'business_key' => 'OLO/' . random_int(100000, 999999),
                 'name' => $faker->name,
                 'phoneNumber' => '08' . strval($faker->numerify('##########')),
@@ -33,6 +33,16 @@ class CustomerRequestSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
+
+            $customers = $customerRequest->service->backrooms;
+    
+            foreach ($customers as $customer) {
+                BackroomStatus::create([
+                    'customer_request_id' => $customerRequest->id,
+                    'backroom_id' => $customer->id,
+                    'name' => 'Waiting to Process',
+                ]);
+            }
         }
     }
 }

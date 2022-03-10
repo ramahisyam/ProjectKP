@@ -27,3 +27,4 @@ Route::put('/backroom/{status}', 'BackroomController@update')->name('backroom.up
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);

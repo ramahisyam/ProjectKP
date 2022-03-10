@@ -9,7 +9,7 @@
             <div class="row mb-3">
               <label for="inputEmail3" class="col-sm-2 col-form-label">Nama Pelanggan</label>
               <div class="col-sm-10">
-                <input name="name" type="name" class="form-control @error('name') is-invalid @enderror" id="inputEmail3" placeholder="Nama Customer" value="{{ old('name') }}">
+                <input id="search" name="name" type="name" class="form-control @error('name') is-invalid @enderror" id="inputEmail3" placeholder="Nama Customer" value="{{ old('name') }}">
                 @error('name')
                   <div class="alert alert-danger mt-2">
                     {{ $message }}
@@ -91,7 +91,7 @@
             <div class="row mb-3">
               <label for="inputEmail3" class="col-sm-2 col-form-label">Nama AM</label>
               <div class="col-sm-10">
-                <input name="amName" type="name" class="form-control @error('amName') is-invalid @enderror" id="inputEmail3" placeholder="Nama AM" value="{{ Auth::user()->name }}" readonly>
+                <input name="amName" type="name" class="form-control @error('amName') is-invalid @enderror" id="inputEmail3" placeholder="Nama AM" value="{{ Auth::user()->name }}" readonly alt="">
                 @error('amName')
                   <div class="alert alert-danger mt-2">
                     {{ $message }}
