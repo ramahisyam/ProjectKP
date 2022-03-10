@@ -27,7 +27,6 @@
     </div>
   </div>
   <hr>
-
   {{-- table --}}
 <table class="table table-striped table-bordered">
   <thead>
@@ -36,7 +35,7 @@
 
       {{-- start of column --}}
       <th scope="col">No.</th>
-      <th scope="col">Business Key</th>
+      <th scope="col">@sortablelink('id', 'Business Key')</th>
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>
@@ -91,8 +90,9 @@
           <div class="container">
             <div class="row">
               <div class="col d-md-flex">
-                <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon> Edit</a>
+                <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon>Edit</a>
               </div>
+              <br>
               <div class="col">
                 @if ($status->name == 'Waiting to Process')
                 <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>

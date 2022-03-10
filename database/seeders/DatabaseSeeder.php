@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             BackroomSeeder::class,
             ServiceSeeder::class
-            // CustomerRequestSeeder::class,
+            // CustomerRequestSeeder::class
             // BackroomServiceSeeder::class
         ]);
     }

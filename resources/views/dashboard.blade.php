@@ -3,6 +3,7 @@
 @section('content')
 @can('customer')
 <br>
+<br>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -41,11 +42,11 @@
 
       {{-- start of column --}}
       <th scope="col">No.</th>
-      <th scope="col">Business Key</th>
+      <th scope="col">@sortablelink('id', 'Business Key')</th>
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>
-      <th scope="col">Bandwith</th>
+      <th scope="col">@sortablelink('bandwidth', 'Bandwidth')</th>
       <th scope="col">@sortablelink('created_at', 'Created At')</th>
       <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
       <th scope="col">@sortablelink('address', 'Address')</th>
@@ -114,6 +115,10 @@
                       @endif
                       <br>
                       Notes : {{ $backroom->information }}
+                      <br>
+                      {{-- <button type="button" class="btn btn-primary" data-toggle="popover" title="User Info">Popover with Title</button> --}}
+                      Evidence  : <a class="btn btn-info btn-sm rounded-pill" data-toggle="popover" data-img="{{ Storage::url('public/backroomStatuses/'.$backroom->image) }}" title="Evidence" >Show Evidence</a>
+                      <a href="{{ Storage::url('public/backroomStatuses/'.$backroom->image) }}" download class="btn btn-light btn-sm rounded-pill" target="_blank" rel="noopener noreferrer"><ion-icon name="download-outline"></ion-icon></a>
                     @endif
                     <hr>
                   @endforeach
@@ -164,7 +169,7 @@
  
 
 {{-- pagination --}}
-{{ $customers->links() }}
+{{ $customers->onEachSide(1)->links() }}
 Showing {{$customers->firstItem()}} to {{$customers->lastItem()}} of {{$customers->total()}} entries
 <br>
 <br>

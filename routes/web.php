@@ -27,3 +27,6 @@ Route::put('/backroom/{status}', 'BackroomController@update')->name('backroom.up
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('super', [App\Http\Controllers\SuperController::class, 'index'])->name('super');
+Route::get('super/users', [App\Http\Controllers\SuperUsersController::class, 'index'])->name('users');
