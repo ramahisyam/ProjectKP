@@ -15,7 +15,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/super.css') }}" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -23,7 +23,7 @@
 <body>
     <div>
         <header>
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{-- {{ config('app.name', 'Laravel') }} --}}
