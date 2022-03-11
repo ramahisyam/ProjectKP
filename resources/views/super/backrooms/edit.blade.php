@@ -13,13 +13,13 @@
                 <ion-icon name="business-outline" class="me-2"></ion-icon><span>Backroom</span>
             </a>
             <hr>
-            <a href="{{ route('super.users') }}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <a href="{{ route('super.users') }}" class="list-group-item list-group-item-action py-2 ripple">
                 <ion-icon name="people-outline" class="me-2"></ion-icon><span>Users</span>
             </a>
             <a href="{{ route('super.services') }}" class="list-group-item list-group-item-action py-2 ripple">
                 <ion-icon name="pricetags-outline" class="me-2"></ion-icon><span>Services</span>
             </a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple active" aria-current="true">
                 <ion-icon name="body-outline" class="me-2"></ion-icon><span>Backrooms</span>
             </a>
             <a href="#" class="list-group-item list-group-item-action py-2 ripple">
@@ -32,9 +32,33 @@
 <!-- Sidebar -->
 
 <div class="row justify-content-end">
-<div class="col-10">
-<hr>
-welcome
-</div>
+    <div class="col-10">
+        <br>
+        <br>
+        <div class="container mt-4 mb-5">
+            <form action="#" method="POST" enctype="multipart/form-data" class="form-group">
+                @csrf
+                @method('PATCH')
+                <div class="card-panel panel-default">
+                    <div class="collapse show" id="col-task">
+                        <div class="panel-heading">
+                            <h1 class="panel-title text-center">Edit Backrooms</h1>
+                            <hr>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="p-2">Name</label>
+                                    <input name="name" class="form-control" id="" value="#">
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary float-end">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection

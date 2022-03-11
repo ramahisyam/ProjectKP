@@ -29,4 +29,21 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('super', [App\Http\Controllers\SuperController::class, 'index'])->name('super');
-Route::get('super/users', [App\Http\Controllers\SuperUsersController::class, 'index'])->name('users');
+Route::get('super/users', [App\Http\Controllers\SuperUsersController::class, 'index'])->name('super.users');
+Route::get('super/services', [App\Http\Controllers\SuperServicesController::class, 'index'])->name('super.services');
+Route::get('super/services/edit', [App\Http\Controllers\SuperServicesEditController::class, 'index'])->name('super.edit');
+Route::get('/test', function() {
+    return view('super.edit');
+})->name('home');
+Route::get('/test/backrooms', function() {
+    return view('super.backrooms.dashboard');
+})->name('home');
+Route::get('/test/backrooms/edit', function() {
+    return view('super.backrooms.edit');
+})->name('home');
+Route::get('/test/backrooms/edit', function() {
+    return view('super.backrooms.edit');
+})->name('home');
+Route::get('/test/settings', function() {
+    return view('super.settings');
+})->name('home');
