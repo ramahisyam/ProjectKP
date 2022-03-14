@@ -27,7 +27,6 @@
     </div>
   </div>
   <hr>
-
   {{-- table --}}
 <table class="table table-striped table-bordered">
   <thead>
@@ -36,7 +35,7 @@
 
       {{-- start of column --}}
       <th scope="col">No.</th>
-      <th scope="col">Business Key</th>
+      <th scope="col">@sortablelink('id', 'Business Key')</th>
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>

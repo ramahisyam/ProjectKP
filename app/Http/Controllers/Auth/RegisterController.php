@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Backroom;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -78,8 +78,8 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $backrooms = Backroom::all();
+        $roles = Role::where('name', '!=', 'superAdmin')->get();
 
-        return view('auth.register', compact('backrooms'));
+        return view('auth.register', compact('roles'));
     }
 }

@@ -45,8 +45,8 @@ class UserSeeder extends Seeder
         ]);
 
         $am->assignRole('AM');
-        $am->givePermissionTo('input customer request');
-        $am->givePermissionTo('customer');
+        $am->givePermissionTo('accountManager');
+        // $am->givePermissionTo('customer');
 
         $superAdmin = User::create([
             'name' => 'Admin',

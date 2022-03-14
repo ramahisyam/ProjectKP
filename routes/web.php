@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// Customer Request
 Route::resource('customer', CustomerRequestController::class);
 Route::get('/customer', function(){
     return redirect()->route('home');
 });
 
+// Backroom
 Route::get('/backroom', 'BackroomController@index')->middleware('permission:backroom')->name('backroom.index');
 Route::get('/backroom/{status}/edit', 'BackroomController@edit')->name('backroom.edit');
 Route::put('/backroom/{status}', 'BackroomController@update')->name('backroom.update');
@@ -27,4 +29,9 @@ Route::put('/backroom/{status}', 'BackroomController@update')->name('backroom.up
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
+
+//User
+Route::get('/admin/users', 'UserController@index')->name('user.index');
+Route::get('/admin/users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
+Route::put('/admin/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+Route::delete('/admin/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');

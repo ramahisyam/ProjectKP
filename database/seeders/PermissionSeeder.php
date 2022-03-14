@@ -16,17 +16,13 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             [
-                'name' => 'input customer request',
+                'name' => 'accountManager',
                 'guard_name' => 'web'
             ],
             [
                 'name' => 'backroom',
                 'guard_name' => 'web'
             ],
-            [
-                'name' => 'customer',
-                'guard_name' => 'web'
-            ]
         ];
 
         foreach ($permissions as $permission) {
