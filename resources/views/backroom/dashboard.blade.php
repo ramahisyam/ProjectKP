@@ -39,10 +39,11 @@
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>
-      <th scope="col">Bandwith</th>
-      <th scope="col">@sortablelink('created_at', 'Created At')</th>
+      <th scope="col">@sortablelink('bandwidth', 'Bandwidth')</th>
+      <th scope="col">Assignee</th>
       <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
       <th scope="col">@sortablelink('address', 'Address')</th>
+      <th scope="col">@sortablelink('created_at', 'Created At')</th>
       <th scope="col" colspan="2">Action</th>
       {{-- end of column --}}
 
@@ -73,8 +74,10 @@
         <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td> {{-- bandwithExample --}}
 
-      <td id="createdAt{{ $index + $customers->firstItem() }}">{{$customer->created_at}}
-        <button type="button" data-clipboard-target="#createdAt{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
+      <td id="assignee{{ $index + $customers->firstItem() }}">
+        {{ $customer->user->name }}
+        <span class="badge rounded-pill bg-light text-dark">{{ $customer->user->phoneNumber }}</span>
+        <button type="button" data-clipboard-target="#assignee{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
       <td id="latitudeLongitude{{ $index + $customers->firstItem() }}">{{$customer->latlong}}
@@ -84,6 +87,11 @@
       <td id="address{{ $index + $customers->firstItem() }}">{{$customer->address}}
         <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
+
+      <td id="createdAt{{ $index + $customers->firstItem() }}">{{$customer->created_at}}
+        <button type="button" data-clipboard-target="#createdAt{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
+      </td>
+      
       <td>
         {{-- <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $customer->id }}"><ion-icon name="information-circle-outline"></ion-icon></button> --}}
         @foreach ($customer->statuses as $status)
@@ -95,11 +103,11 @@
               <br>
               <div class="col">
                 @if ($status->name == 'Waiting to Process')
-                <span class="badge rounded-pill bg-secondary">{{ $status->name }}</span>
+                <span class="badge rounded-pill bg-secondary"><ion-icon name="hourglass-outline" class="me-1"></ion-icon>{{ $status->name }}</span>
                 @elseif ($status->name == 'Not Ready')
-                <span class="badge rounded-pill bg-danger">{{ $status->name }}</span>
+                <span class="badge rounded-pill bg-danger"><ion-icon name="alert-circle-outline" class="me-1"></ion-icon>{{ $status->name }}</span>
                 @elseif ($status->name == 'Ready')
-                <span class="badge rounded-pill bg-success">{{ $status->name }}</span>
+                <span class="badge rounded-pill bg-success"><ion-icon name="checkmark-done-outline" class="me-1"></ion-icon>{{ $status->name }}</span>
                 @endif
               </div>
             </div>

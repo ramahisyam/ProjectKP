@@ -7,7 +7,7 @@
         <form action="{{ route('customer.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
             <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">Nama Pelanggan</label>
+              <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="chatbox-outline" class="me-1"></ion-icon>Nama Pelanggan</label>
               <div class="col-sm-10">
                 <input name="name" type="name" class="form-control @error('name') is-invalid @enderror" id="inputEmail3" placeholder="Nama Customer" value="{{ old('name') }}">
                 @error('name')
@@ -18,7 +18,7 @@
               </div>
             </div>
             <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">No Telp. Pelanggan</label>
+              <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="call-outline" class="me-1"></ion-icon>No Telp. Pelanggan</label>
               <div class="col-sm-10">
                 <input name="phoneNumber" type="tel" class="form-control @error('phoneNumber') is-invalid @enderror" id="inputEmail3" placeholder="08xxxxxxxxx" value="{{ old('phoneNumber') }}">
                 @error('phoneNumber')
@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Latlong</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="navigate-outline" class="me-1"></ion-icon>Latlong</label>
                 <div class="col-sm-10">
                   <input name="latlong" type="name" class="form-control @error('latlong') is-invalid @enderror" id="inputEmail3" placeholder="Latitude & Longitude" value="{{ old('latlong') }}">
                   @error('latlong')
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="map-outline" class="me-1"></ion-icon>Alamat</label>
                 <div class="col-sm-10">
                   <input name="address" type="name" class="form-control @error('address') is-invalid @enderror" id="inputEmail3" placeholder="Alamat" value="{{ old('address') }}">
                   @error('address')
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Service</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="pricetags-outline" class="me-1"></ion-icon>Service</label>
                 <div class="col-sm-10">
                     <select name="service_id" class="form-select @error('service_id') is-invalid @enderror" aria-label="Default select example">
                       <option>-----Pilih service-----</option>  
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Bandwidth</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="cellular-outline" class="me-1"></ion-icon>Bandwidth</label>
                 <div class="col-sm-10">
                   <div class="input-group">
                     <input name="bandwidth" type="number" class="form-control @error('bandwidth') is-invalid @enderror" placeholder="Bandwidth" value="{{ old('bandwidth') }}">
@@ -89,7 +89,7 @@
             <h5>Account Manager</h5>
             <hr>
             <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">Nama AM</label>
+              <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="people-outline" class="me-1"></ion-icon>Nama AM</label>
               <div class="col-sm-10">
                 <input name="amName" type="name" class="form-control @error('amName') is-invalid @enderror" id="inputEmail3" placeholder="Nama AM" value="{{ Auth::user()->name }}" readonly>
                 @error('amName')
@@ -100,7 +100,7 @@
               </div>
             </div>
             <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">No Telp. AM</label>
+              <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="call-outline" class="me-1"></ion-icon>No Telp. AM</label>
               <div class="col-sm-10">
                 <input name="amPhoneNumber" type="tel" class="form-control @error('amPhoneNumber') is-invalid @enderror" id="inputEmail3" placeholder="" value="{{ Auth::user()->phoneNumber }}" readonly>
                 @error('amPhoneNumber')
@@ -136,11 +136,11 @@
             </div>
             <div class="row mb-3">
               <div class="col">
-                <button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary float-end">Tambahkan Witel</button>
+                <button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary float-end"><ion-icon name="add-circle-outline" class="me-1"></ion-icon>Tambahkan Witel</button>
               </div>
             </div>
             <hr>
-          <button type="submit" class="btn btn-primary float-end">Submit</button>
+          <button type="submit" class="btn btn-primary float-end"><ion-icon name="cloud-done-outline" class="me-2"></ion-icon>Submit</button>
         </form>
     </div>
     <script type="text/javascript">
