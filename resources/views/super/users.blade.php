@@ -13,11 +13,14 @@
                 <ion-icon name="business-outline" class="me-2"></ion-icon><span>Backroom</span>
             </a>
             <hr>
-            <a href="{{ route('users') }}" class="list-group-item list-group-item-action py-2 ripple active" aria-current="true">
+            <a href="{{ route('super.users') }}" class="list-group-item list-group-item-action py-2 ripple active" aria-current="true">
                 <ion-icon name="people-outline" class="me-2"></ion-icon><span>Users</span>
             </a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+            <a href="{{ route('super.services') }}" class="list-group-item list-group-item-action py-2 ripple">
                 <ion-icon name="pricetags-outline" class="me-2"></ion-icon><span>Services</span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+              <ion-icon name="body-outline" class="me-2"></ion-icon><span>Backrooms</span>
             </a>
             <a href="#" class="list-group-item list-group-item-action py-2 ripple">
                 <ion-icon name="settings-outline" class="me-2"></ion-icon><span>Settings</span>
