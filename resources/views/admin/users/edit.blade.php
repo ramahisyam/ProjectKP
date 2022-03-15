@@ -1,6 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Sidebar -->
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white position-fixed" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+  <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+          <a href="" class="list-group-item list-group-item-action py-2 ripple">
+              <ion-icon name="bag-outline" class="me-2"></ion-icon><span>Customer</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+              <ion-icon name="business-outline" class="me-2"></ion-icon><span>Backroom</span>
+          </a>
+          <hr>
+          <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action py-2 ripple active" aria-current="true">
+              <ion-icon name="people-outline" class="me-2"></ion-icon><span>Users</span>
+          </a>
+          <a href="{{ route('service.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+              <ion-icon name="pricetags-outline" class="me-2"></ion-icon><span>Services</span>
+          </a>
+          <a href="{{ route('settings.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+              <ion-icon name="settings-outline" class="me-2"></ion-icon><span>Settings</span>
+          </a>
+          
+      </div>
+  </div>
+</nav>
+<!-- Sidebar -->
+
 <div class="container pt-4 mb-5 main">
   <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data" class="form-group">
     @csrf

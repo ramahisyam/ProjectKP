@@ -21,7 +21,7 @@ class CustomerRequestController extends Controller
 
     public function create() {
         $services = Service::all();
-        $witels = Backroom::where('name', 'like', 'Witel%')->get();
+        $witels = Backroom::where('name', 'LIKE', 'Witel%')->get();
 
         return view('customer-request.add', compact('services', 'witels'));
 
@@ -43,7 +43,7 @@ class CustomerRequestController extends Controller
             //     ]
         ]);
 
-        $customer = CustomerRequest::create([
+        $customerRequest = CustomerRequest::create([
             'business_key' => 'OLO/' . random_int(100000, 999999),
             'name' => $request->name,
             'phoneNumber' => $request->phoneNumber,
@@ -56,11 +56,21 @@ class CustomerRequestController extends Controller
 
         foreach ($request->witel as $item => $value) {
             BackroomStatus::create([
-                'customer_request_id' => $customer->id,
+                'customer_request_id' => $customerRequest->id,
                 'backroom_id' => $value,
                 'name' => 'Waiting to Process',
             ]);
         }
+
+        $customers = $customerRequest->service->backrooms;
+    
+            foreach ($customers as $customer) {
+                BackroomStatus::create([
+                    'customer_request_id' => $customerRequest->id,
+                    'backroom_id' => $customer->id,
+                    'name' => 'Waiting to Process',
+                ]);
+            }
 
         if ($customer) {
             return redirect()->route('customer.create')->with(['success' => 'Data Berhasil Disimpan']);
