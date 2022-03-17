@@ -10,11 +10,6 @@ use App\Models\User;
 
 class AdminSettingController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function edit()
     {
         return view('admin.settings.edit');

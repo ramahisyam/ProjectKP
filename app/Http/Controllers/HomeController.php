@@ -41,10 +41,10 @@ class HomeController extends Controller
 
         if ($user->hasRole('AM')) {
             return view('dashboard', compact('customers'));
-        } else if ($user->hasRole('backroom')) {
-            return redirect()->route('backroom.index');
         } else if ($user->hasRole('superAdmin')) {
             return redirect()->route('user.index');
+        } else{
+            return redirect()->route('backroomtask.index');
         }
     }
     

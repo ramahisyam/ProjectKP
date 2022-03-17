@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@can('backroom')
 <div id="app">
         
 </div>
@@ -15,7 +14,7 @@
       {{-- start of search form --}}
       <div class="row justify-content-end">
         <div class="col-md-12">
-          <form action="/backroom" method="GET">
+          <form action="/backroom/task" method="GET">
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="Search here . . ." name="search">
               <button class="btn btn-outline-primary" type="submit" ><ion-icon name="search-outline"></ion-icon></button>
@@ -90,7 +89,7 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon> Edit</a>
+                <a href="{{ route('backroomtask.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon> Edit</a>
               </div>
             </div>
             <div class="row">
@@ -150,5 +149,4 @@ Showing {{$customers->firstItem()}} to {{$customers->lastItem()}} of {{$customer
 
 </div>
 
-@endcan
 @endsection

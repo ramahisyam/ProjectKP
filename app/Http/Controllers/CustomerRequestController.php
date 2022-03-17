@@ -14,11 +14,6 @@ use Illuminate\Validation\Rule;
 
 class CustomerRequestController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function create() {
         $services = Service::all();
         $witels = Backroom::where('name', 'LIKE', 'Witel%')->get();

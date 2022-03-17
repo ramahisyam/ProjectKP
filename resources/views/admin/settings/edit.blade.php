@@ -18,6 +18,9 @@
             <a href="{{ route('service.index') }}" class="list-group-item list-group-item-action py-2 ripple">
                 <ion-icon name="pricetags-outline" class="me-2"></ion-icon><span>Services</span>
             </a>
+            <a href="{{ route('backroom.index') }}" class="list-group-item list-group-item-action py-2 ripple aria-current="true">
+                <ion-icon name="body-outline" class="me-2"></ion-icon><span>Backroom & Witel</span>
+            </a>
             <a class="list-group-item list-group-item-action py-2 ripple active"
             data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="multiCollapseExample1">
                 <ion-icon name="settings-outline" class="me-2"></ion-icon><span>Settings</span>
@@ -40,7 +43,7 @@
 </nav>
 <!-- Sidebar -->
 
-<div class="container">
+<div class="container main">
 
     <div class="panel-heading">
         <h1 class="panel-title text-center">Edit Profile Admin</h1>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-4 mb-5">
-  <form action="{{ route('backroom.update', $status->id) }}" method="POST" enctype="multipart/form-data" class="form-group">
+  <form action="{{ route('backroomtask.update', $status->id) }}" method="POST" enctype="multipart/form-data" class="form-group">
     @csrf
     @method('PUT')
     <div class="card-panel panel-default">

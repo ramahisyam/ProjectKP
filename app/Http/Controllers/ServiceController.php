@@ -34,16 +34,20 @@ class ServiceController extends Controller
         ]);
 
         foreach ($request->backroom as $backroom => $value) {
-            DB::table('backroom_service')->insert([
-                'service_id' => $service->id,
-                'backroom_id' => $value
-            ]);
+            if ($value == '-----Pilih Backroom-----') {
+                break;
+            }else {
+                DB::table('backroom_service')->insert([
+                    'service_id' => $service->id,
+                    'backroom_id' => $value
+                ]);
+            }
         }
 
         if ($service) {
-            return redirect()->back()->with(['success' => 'Data Berhasil Disimpan']);
+            return redirect()->route('service.index')->with(['success' => 'Data Berhasil Disimpan']);
         }else {
-            return redirect()->back()->with(['error' => 'Data Gagal Disimpan']);
+            return redirect()->route('service.index')->with(['error' => 'Data Gagal Disimpan']);
         }
     }
 
@@ -60,17 +64,25 @@ class ServiceController extends Controller
         ]);
 
         $service->update([
-            'name' => $request->name
+            'name' => $request->name,
         ]);
 
-        DB::table('backroom_service')->where('id', $service->backrooms)->update([
-            'backroom_id' => $request->backroom
-        ]);
+        // foreach ($request->backroom as $backroom => $value) {
+            
+        // }
+        // for ($i=0; $i < $request->backroom; $i++) { 
+        //     $service->backrooms()->detach();
+        //     $service->backrooms()->attach($request->backroom);
+        // }
+
+        // DB::table('backroom_service')->where('id', $service->backrooms)->update([
+        //     'backroom_id' => $request->backroom
+        // ]);
 
         if ($service) {
-            return redirect()->back()->with(['success' => 'Data Berhasil Disimpan']);
+            return redirect()->route('service.index')->with(['success' => 'Data Berhasil Disimpan']);
         }else {
-            return redirect()->back()->with(['error' => 'Data Gagal Disimpan']);
+            return redirect()->route('service.index')->with(['error' => 'Data Gagal Disimpan']);
         }
     }
 
