@@ -33,7 +33,6 @@ class BackroomSeeder extends Seeder
             ['name' => 'Witel 13'],
             ['name' => 'RNO'],
             ['name' => 'Sigma'],
-            ['name' => 'DSS'],
         ]);
     }
 }

@@ -16,7 +16,7 @@ class ServiceSeeder extends Seeder
     {
         $services = [
             ['name' => 'Astinet'],
-            ['name' => 'NeucentrIX']
+            ['name' => 'neuCentrIX']
 
         ];
 

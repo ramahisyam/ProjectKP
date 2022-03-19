@@ -3,75 +3,71 @@
 namespace App\Http\Controllers;
 
 use App\Models\Backroom;
-use App\Models\BackroomStatus;
 use Illuminate\Http\Request;
-use App\Models\CustomerRequest;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Builder;
 
 class BackroomController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        $user = auth()->user();
-        // dd($user->getRoleNames());
-        if ($user->can('backroom')) {
-            $backroom = Backroom::where('name', $user->getRoleNames()[0])->first();
-            $customers = CustomerRequest::sortable()->filter(request(['search']))
-            ->with(['statuses' => function ($query) use ($backroom){
-                $query->where('backroom_id', $backroom->id);
-            }])
-            ->whereHas('statuses', function($query) use ($backroom){
-                $query->where('backroom_id', $backroom->id);
-            })
-            ->paginate(10);
-            // dd($customers->toArray());
-            return view('backroom.dashboard', compact('customers', 'user'));
-        }
+        $backrooms = Backroom::latest()->paginate(10);
+        return view('admin.backroom.index', compact('backrooms'));
+    }
+    
+    public function create()
+    {
+        return view('admin.backroom.add');
     }
 
-    public function edit(BackroomStatus $status)
+    public function store(Request $request)
     {
-        return view('backroom.edit', compact('status'));
-    }
-
-    public function update(Request $request, BackroomStatus $status)
-    {
-        $status = BackroomStatus::findOrFail($status->id);
-        $this->validate($request, [
-            'image' => 'image|mimes:png,jpg,jpeg'
+        $request->validate([
+            'name' => 'required',
         ]);
 
-        if ($request->file('image') == "") {
-            $status->update([
-                'name' => $request->name,
-                'information' => $request->information,
-            ]);
-        } else {
-            Storage::disk('local')->delete('public/backroomStatuses/'.$status->image);
+        $service = Backroom::create([
+            'name' => $request->name,
+        ]);
 
-            $image = $request->file('image');
-            $image->storeAs('public/backroomStatuses', $image->hashName());
-
-            $status->update([
-                'image'     => $image->hashName(),
-                'name' => $request->name,
-                'information' => $request->information,
-            ]);
-        }
-
-        if ($status) {
+        if ($service) {
             return redirect()->route('backroom.index')->with(['success' => 'Data Berhasil Disimpan']);
         }else {
             return redirect()->route('backroom.index')->with(['error' => 'Data Gagal Disimpan']);
         }
     }
 
-    
-    
+    public function edit(Backroom $backroom)
+    {
+        return view('admin.backroom.edit', compact('backroom'));
+    }
+
+    public function update(Request $request, Backroom $backroom)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $backroom->update([
+            'name' => $request->name
+        ]);
+
+        if ($backroom) {
+            return redirect()->route('backroom.index')->with(['success' => 'Data Berhasil Disimpan']);
+        }else {
+            return redirect()->route('backroom.index')->with(['error' => 'Data Gagal Disimpan']);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $backrooms = Backroom::findOrFail($id);
+        $backrooms->delete();
+        
+        if($backrooms){
+            //redirect dengan pesan sukses
+            return redirect()->back()->with(['success' => 'Data Berhasil Dihapus!']);
+       }else{
+           //redirect dengan pesan error
+           return redirect()->back()->with(['error' => 'Data Gagal Dihapus!']);
+       }
+   }
 }

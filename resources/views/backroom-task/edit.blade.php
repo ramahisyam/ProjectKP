@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-4 mb-5">
-  <form action="{{ route('backroom.update', $status->id) }}" method="POST" enctype="multipart/form-data" class="form-group">
+  <form action="{{ route('backroomtask.update', $status->id) }}" method="POST" enctype="multipart/form-data" class="form-group">
     @csrf
     @method('PUT')
     <div class="card-panel panel-default">
@@ -25,8 +25,8 @@
             </div>
             
             <div class="col-md-6">
-              <label class="p-2">Bandwith</label>
-              <input class="form-control" id="" readonly="" value="{{ $status->customerRequests->bandwidth }}">
+              <label class="p-2">Kapasitas</label>
+              <input class="form-control" id="" readonly="" value="{{ $status->customerRequests->capcity }}">
               <label class="p-2">Long Lat</label>
               <input name="longlat" class="form-control" id="" readonly="" value="{{ $status->customerRequests->latlong }}">
               <label class="p-2">Status</label>
