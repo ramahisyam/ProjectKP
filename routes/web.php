@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\CustomerRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,30 +16,27 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 // Customer Request
 Route::group(['middleware' => ['role:AM']], function() {
     Route::resource('customer', CustomerRequestController::class);
-    Route::get('/customer', function(){
-        return redirect()->route('home');
-    });
 });
 
 // BackroomTask
 Route::group(['middleware' => ['permission:backroom']], function() {
     Route::get('/backroom/task', [App\Http\Controllers\BackroomTaskController::class, 'index'])->middleware('permission:backroom')->name('backroomtask.index');
-    Route::get('/backroom/task/{status}/edit', 'BackroomTaskController@edit')->name('backroomtask.edit');
-    Route::put('/backroom/task/{status}', 'BackroomTaskController@update')->name('backroomtask.update');
+    Route::get('/backroom/task/{status}/edit', [App\Http\Controllers\BackroomTaskController::class, 'edit'])->name('backroomtask.edit');
+    Route::put('/backroom/task/{status}', [App\Http\Controllers\BackroomTaskController::class, 'update'])->name('backroomtask.update');
     
 });
-
-Auth::routes();
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Super Admin
 Route::group(['middleware' => ['role:superAdmin']], function() {
     //User
-    Route::get('/admin/users', 'UserController@index')->name('user.index');
+    Route::get('/admin/users', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
     Route::get('/admin/users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
     Route::put('/admin/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
     Route::delete('/admin/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
@@ -64,6 +62,16 @@ Route::group(['middleware' => ['role:superAdmin']], function() {
     Route::get('/backroom/{backroom}/edit', [App\Http\Controllers\BackroomController::class, 'edit'])->name('backroom.edit');
     Route::put('/backroom/{backroom}', [App\Http\Controllers\BackroomController::class, 'update'])->name('backroom.update');
     Route::delete('/backroom/{backroom}', [App\Http\Controllers\BackroomController::class, 'destroy'])->name('backroom.destroy');
+
+    //Customer request for admin
+    Route::get('admin/customer', function () {
+        $customers = CustomerRequest::sortable()
+        ->latest()
+        ->filter(request(['search']))
+        ->with('statuses')
+        ->paginate(10);
+        return view('admin.customer.index', compact('customers'));
+    })->name('customer.admin');
 });
 
 

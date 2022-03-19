@@ -35,8 +35,8 @@
             </div>
             
             <div class="col-md-6">
-              <label class="p-2">Bandwith</label>
-              <input class="form-control" id="" value="{{ $customer->bandwidth }}">
+              <label class="p-2">Kapasitas</label>
+              <input class="form-control" id="" value="{{ $customer->capcity }}">
               <label class="p-2">Latlong</label>
               <input name="latlong" class="form-control" id="" value="{{ $customer->latlong }}">
               <label class="p-2">Phone Number</label>

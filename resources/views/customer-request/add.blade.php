@@ -31,7 +31,8 @@
             <div class="row mb-3">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Latlong</label>
                 <div class="col-sm-10">
-                  <input name="latlong" type="name" class="form-control @error('latlong') is-invalid @enderror" id="inputEmail3" placeholder="Latitude & Longitude" value="{{ old('latlong') }}">
+                  <input name="latlong" type="name" class="form-control @error('latlong') is-invalid @enderror" id="inputEmail3" placeholder="43.xxxxx, -23.xxxxx, " value="{{ old('latlong') }}">
+                  <span class="text-primary">Ex : 43.1351, -34.1345</span>
                   @error('latlong')
                     <div class="alert alert-danger mt-2">
                       {{ $message }}
@@ -67,19 +68,18 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Bandwidth</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Kapasitas</label>
                 <div class="col-sm-10">
                   <div class="input-group">
-                    <input name="bandwidth" type="number" class="form-control @error('bandwidth') is-invalid @enderror" placeholder="Bandwidth" value="{{ old('bandwidth') }}">
+                    <input name="capcity" type="number" class="form-control @error('capcity') is-invalid @enderror" placeholder="Kapasitas" value="{{ old('capcity') }}">
                     <span>
                       <select name="unit" class="form-select" id="inputGroupSelect01">
-                        <option value="MB">MB</option>
-                        <option value="GB">GB</option>
-                        <option value="TB">TB</option>
+                        <option value="MB">Mbps</option>
+                        <option value="GB">Rak</option>
                       </select>
                     </span>
                   </div>
-                  @error('bandwidth')
+                  @error('capcity')
                     <div class="alert alert-danger mt-2">
                       {{ $message }}
                     </div>

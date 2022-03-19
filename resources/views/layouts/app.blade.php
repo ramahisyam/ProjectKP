@@ -50,6 +50,25 @@
                                 </li>
                             @endif
                             @else
+                                @can('backroom')
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <ion-icon name="notifications-outline"></ion-icon>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            @forelse ($user->notifications as $notification)
+                                                <a class="dropdown-item" href="{{ url('/backroom/task?search=' . $notification->data['businessKey']) }}">
+                                                    Terdapat Task baru dari <br>
+                                                    <span class="text-primary">{{ $notification->data['name'] }}</span><br>
+                                                    dengan business key : <span class="text-primary">{{ $notification->data['businessKey'] }}</span>
+                                                </a>
+                                                <hr>
+                                            @empty
+                                                <a class="dropdown-item">Belum ada Task</a>
+                                            @endforelse
+                                        </div>
+                                    </li>
+                                @endcan
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <ion-icon name="person-circle-outline"></ion-icon>

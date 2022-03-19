@@ -40,9 +40,10 @@ class HomeController extends Controller
         ->paginate(10);
 
         if ($user->hasRole('AM')) {
-            return view('dashboard', compact('customers'));
+            // return view('customer-request.index', compact('customers', 'user'));
+            return redirect()->route('customer.index');
         } else if ($user->hasRole('superAdmin')) {
-            return redirect()->route('user.index');
+            return redirect()->route('customer.admin');
         } else{
             return redirect()->route('backroomtask.index');
         }

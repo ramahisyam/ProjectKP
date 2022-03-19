@@ -6,13 +6,9 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white position-fixed" aria-haspopup="true" aria-expanded="false" v-pre>
         <div class="position-sticky">
             <div class="list-group list-group-flush mx-3 mt-4">
-                <a href="" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="{{ route('customer.admin') }}" class="list-group-item list-group-item-action py-2 ripple">
                     <ion-icon name="bag-outline" class="me-2"></ion-icon><span>Customer</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                    <ion-icon name="business-outline" class="me-2"></ion-icon><span>Backroom</span>
-                </a>
-                <hr>
                 <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                     <ion-icon name="people-outline" class="me-2"></ion-icon><span>Users</span>
                 </a>

@@ -16,9 +16,10 @@ class BackroomNotification extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($name, $businessKey)
     {
-        //
+        $this->name = $name;
+        $this->businessKey = $businessKey;
     }
 
     /**
@@ -29,7 +30,7 @@ class BackroomNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +56,8 @@ class BackroomNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'name' => $this->name,
+            'businessKey' => $this->businessKey
         ];
     }
 }

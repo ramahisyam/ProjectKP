@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
@@ -73,13 +74,12 @@ class RegisterController extends Controller
             'phoneNumber' => $data['phoneNumber'],
         ])->assignRole($data['role']);
 
-        if ($user->getRoleNames()[0] != 'AM') {
-            return $user->givePermissionTo('backroom');
+        if ($user->getRoleNames()[0] == 'AM') {
+            return $user->givePermissionTo('accountManager');
         } else {
-            return $user;
+            return $user->givePermissionTo('backroom');
         }
-
-        dd($user);
+        
     }
 
     public function showRegistrationForm()

@@ -26,12 +26,13 @@ class BackroomTaskController extends Controller
         ->latest()
         ->paginate(10);
         // dd($customers->toArray());
-        return view('backroom-task.dashboard', compact('customers', 'user'));
+        return view('backroom-task.index', compact('customers', 'user'));
     }
 
     public function edit(BackroomStatus $status)
     {
-        return view('backroom-task.edit', compact('status'));
+        $user = auth()->user();
+        return view('backroom-task.edit', compact('status', 'user'));
     }
 
     public function update(Request $request, BackroomStatus $status)

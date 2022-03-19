@@ -2,18 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BackroomNotification;
 use App\Models\Backroom;
 use Illuminate\Http\Request;
 use App\Models\CustomerRequest;
 use App\Models\Service;
 use App\Models\BackroomStatus;
+use App\Models\User;
+use App\Notifications\BackroomNotification;
 use Axiom\Rules\LocationCoordinates;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rule;
 
 class CustomerRequestController extends Controller
 {
+    public function index()
+    {
+        $customers = CustomerRequest::sortable()
+        ->latest()
+        ->filter(request(['search']))
+        ->with('statuses')
+        ->paginate(10);
+
+        return view('customer-request.index', compact('customers'));
+    }
+
     public function create() {
         $services = Service::all();
         $witels = Backroom::where('name', 'LIKE', 'Witel%')->get();
@@ -38,8 +51,10 @@ class CustomerRequestController extends Controller
             //     ]
         ]);
 
+        $businessKey = 'OLO/' . random_int(100000, 999999);
+
         $customerRequest = CustomerRequest::create([
-            'business_key' => 'OLO/' . random_int(100000, 999999),
+            'business_key' => $businessKey,
             'name' => $request->name,
             'phoneNumber' => $request->phoneNumber,
             'latlong' => $request->latlong,
@@ -55,17 +70,28 @@ class CustomerRequestController extends Controller
                 'backroom_id' => $value,
                 'name' => 'Waiting to Process',
             ]);
+            $backroom = Backroom::where('id', $value)->first();
+            $user = User::whereHas('roles', function($query) use ($backroom) {
+                $query->where('name', $backroom->name);
+            })->get();
+            Notification::send($user, new BackroomNotification($request->name, $businessKey));
         }
 
         $customers = $customerRequest->service->backrooms;
     
-            foreach ($customers as $customer) {
-                BackroomStatus::create([
-                    'customer_request_id' => $customerRequest->id,
-                    'backroom_id' => $customer->id,
-                    'name' => 'Waiting to Process',
-                ]);
-            }
+        foreach ($customers as $customer) {
+            BackroomStatus::create([
+                'customer_request_id' => $customerRequest->id,
+                'backroom_id' => $customer->id,
+                'name' => 'Waiting to Process',
+            ]);
+            $backroom = Backroom::where('id', $customer->id)->first();
+            $user = User::whereHas('roles', function($query) use ($backroom) {
+                $query->where('name', $backroom->name);
+            })->get();
+            Notification::send($user, new BackroomNotification($request->name, $businessKey));
+        }
+        // Notification::send($user, new BackroomNotification($request->name));
 
         if ($customer) {
             return redirect()->route('customer.create')->with(['success' => 'Data Berhasil Disimpan']);
