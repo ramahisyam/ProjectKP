@@ -31,7 +31,7 @@
             <div class="row mb-3">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Latlong</label>
                 <div class="col-sm-10">
-                  <input name="latlong" type="name" class="form-control @error('latlong') is-invalid @enderror" id="inputEmail3" placeholder="43.xxxxx, -23.xxxxx, " value="{{ old('latlong') }}">
+                  <input name="latlong" type="name" class="form-control @error('latlong') is-invalid @enderror" id="inputEmail3" placeholder="43.xxxxx, -23.xxxxx" value="{{ old('latlong') }}">
                   <span class="text-primary">Ex : 43.1351, -34.1345</span>
                   @error('latlong')
                     <div class="alert alert-danger mt-2">
