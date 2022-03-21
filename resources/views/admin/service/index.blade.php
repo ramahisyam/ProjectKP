@@ -89,7 +89,7 @@
             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('service.destroy', $service->id) }}" method="POST">
             @csrf
             @method('DELETE')
-              <a class="btn btn-warning btn-primary-spacing btn-sm" href="{{ route('service.edit', $service->id) }}"><ion-icon name="create-outline"></ion-icon></a>
+              {{-- <a class="btn btn-warning btn-primary-spacing btn-sm" href="{{ route('service.edit', $service->id) }}"><ion-icon name="create-outline"></ion-icon></a> --}}
               <button type="submit" class="btn btn-danger btn-primary-spacing btn-sm"><ion-icon name="trash-outline"></ion-icon></button>
             </form>
           </td>

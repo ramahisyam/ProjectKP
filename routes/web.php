@@ -20,6 +20,12 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//User Settings
+Route::get('/users/settings', [App\Http\Controllers\UserSettingController::class, 'edit'])->name('user.settings.edit');
+Route::put('/users/settings', [App\Http\Controllers\UserSettingController::class, 'update'])->name('user.settings.update');
+Route::get('/users/change-password', [App\Http\Controllers\UserSettingController::class, 'changePassword'])->name('user.settings.changePassword');
+Route::post('/users/change-password', [App\Http\Controllers\UserSettingController::class, 'updatePassword'])->name('user.settings.updatePassword');
+
 // Customer Request
 Route::group(['middleware' => ['role:AM']], function() {
     Route::resource('customer', CustomerRequestController::class);
