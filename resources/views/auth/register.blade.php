@@ -58,8 +58,8 @@
                             <div class="col-md-6">
                                 <select name="role" class="form-select @error('role') is-invalid @enderror" aria-label="Default select example">
                                   <option>-----Pilih Role anda-----</option>  
-                                  @foreach ($backrooms as $backroom)
-                                    <option value="{{ $backroom->name }}" {{ old('role') == $backroom->id ? 'selected' : '' }}>{{ $backroom->name }}</option>
+                                  @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}" {{ old('role') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
                                   @endforeach
                                 </select>
                                 @error('role')

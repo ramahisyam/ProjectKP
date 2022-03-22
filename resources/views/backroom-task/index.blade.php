@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@can('backroom')
 <div id="app">
         
 </div>
@@ -15,7 +14,7 @@
       {{-- start of search form --}}
       <div class="row justify-content-end">
         <div class="col-md-12">
-          <form action="/backroom" method="GET">
+          <form action="/backroom/task" method="GET">
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="Search here . . ." name="search">
               <button class="btn btn-outline-primary" type="submit" ><ion-icon name="search-outline"></ion-icon></button>
@@ -39,8 +38,8 @@
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>
-      <th scope="col">@sortablelink('bandwidth', 'Bandwidth')</th>
-      <th scope="col">Assignee</th>
+      <th scope="col">Kapasitas</th>
+      <th scope="col">@sortablelink('created_at', 'Created At')</th>
       <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
       <th scope="col">@sortablelink('address', 'Address')</th>
       <th scope="col">@sortablelink('created_at', 'Created At')</th>
@@ -70,9 +69,9 @@
         <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
-      <td id="bandwith{{ $index + $customers->firstItem() }}">{{ $customer->bandwidth }}
-        <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
-      </td> {{-- bandwithExample --}}
+      <td id="capcity{{ $index + $customers->firstItem() }}">{{ $customer->capcity }}
+        <button type="button" data-clipboard-target="#capcity{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
+      </td>
 
       <td id="assignee{{ $index + $customers->firstItem() }}">
         {{ $customer->user->name }}
@@ -97,10 +96,11 @@
         @foreach ($customer->statuses as $status)
           <div class="container">
             <div class="row">
-              <div class="col d-md-flex">
-                <a href="{{ route('backroom.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon>Edit</a>
+              <div class="col">
+                <a href="{{ route('backroomtask.edit', $status->id) }}" class="btn btn-warning align-middle rounded-pill btn-sm"><ion-icon name="create-outline"></ion-icon> Edit</a>
               </div>
-              <br>
+            </div>
+            <div class="row">
               <div class="col">
                 @if ($status->name == 'Waiting to Process')
                 <span class="badge rounded-pill bg-secondary"><ion-icon name="hourglass-outline" class="me-1"></ion-icon>{{ $status->name }}</span>
@@ -157,5 +157,4 @@ Showing {{$customers->firstItem()}} to {{$customers->lastItem()}} of {{$customer
 
 </div>
 
-@endcan
 @endsection

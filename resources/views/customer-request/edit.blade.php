@@ -35,9 +35,9 @@
             </div>
             
             <div class="col-md-6">
-              <label class="p-2"><ion-icon name="cellular-outline" class="me-1"></ion-icon>Bandwith</label>
-              <input class="form-control" id="" value="{{ $customer->bandwidth }}">
-              <label class="p-2"><ion-icon name="navigate-outline" class="me-1"></ion-icon>Latlong</label>
+              <label class="p-2">Kapasitas</label>
+              <input class="form-control" id="" value="{{ $customer->capcity }}">
+              <label class="p-2">Latlong</label>
               <input name="latlong" class="form-control" id="" value="{{ $customer->latlong }}">
               <label class="p-2"><ion-icon name="call-outline" class="me-1"></ion-icon>Phone Number</label>
               <input name="phoneNumber" class="form-control" id="" value="{{ $customer->phoneNumber }}">

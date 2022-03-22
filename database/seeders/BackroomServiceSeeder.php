@@ -18,54 +18,12 @@ class BackroomServiceSeeder extends Seeder
             //Astinet
             [
                 'service_id' => 1,
-                'backroom_id' => 2,
-                'customer_request_id' => 3
-            ],
-            [
-                'service_id' => 1,
-                'backroom_id' => 5,
-                'customer_request_id' => 3
-            ],
-            [
-                'service_id' => 1,
-                'backroom_id' => 8,
-                'customer_request_id' => 3
-            ],
-            [
-                'service_id' => 1,
-                'backroom_id' => 12,
-                'customer_request_id' => 3
-            ],
-            [
-                'service_id' => 1,
-                'backroom_id' => 17,
-                'customer_request_id' => 3
+                'backroom_id' => 2
             ],
             //NeucentrIX
             [
                 'service_id' => 2,
-                'backroom_id' => 4,
-                'customer_request_id' => 1
-            ],
-            [
-                'service_id' => 2,
-                'backroom_id' => 7,
-                'customer_request_id' => 1
-            ],
-            [
-                'service_id' => 2,
-                'backroom_id' => 10,
-                'customer_request_id' => 1
-            ],
-            [
-                'service_id' => 2,
-                'backroom_id' => 13,
-                'customer_request_id' => 1
-            ],
-            [
-                'service_id' => 2,
-                'backroom_id' => 15,
-                'customer_request_id' => 1
+                'backroom_id' => 17
             ],
         ];
 

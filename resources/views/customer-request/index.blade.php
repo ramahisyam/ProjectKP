@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@can('customer')
+@can('accountManager')
 <br>
 <br>
 <div class="container">
@@ -26,13 +26,9 @@
   </div>
   <hr>
 
-  @can('input customer request')
-  
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary me-md-2 btn-sm" type="button" href="{{ route('customer.create') }}"><ion-icon name="add-circle-outline"></ion-icon> Add New Customer</a>
-    </div>
-                            
-  @endcan
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a class="btn btn-primary me-md-2 btn-sm" type="button" href="{{ route('customer.create') }}"><ion-icon name="add-circle-outline"></ion-icon> Add New Customer</a>
+  </div>
 
   {{-- table --}}
 <table class="table table-striped table-bordered">
@@ -46,8 +42,8 @@
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>
-      <th scope="col">@sortablelink('bandwidth', 'Bandwidth')</th>
-      <th scope="col">Assignee</th>
+      <th scope="col">@sortablelink('capcity', 'Kapasitas')</th>
+      <th scope="col">@sortablelink('created_at', 'Created At')</th>
       <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
       <th scope="col">@sortablelink('address', 'Address')</th>
       <th scope="col">@sortablelink('created_at', 'Created At')</th>
@@ -77,9 +73,9 @@
         <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
-      <td id="bandwith{{ $index + $customers->firstItem() }}">{{ $customer->bandwidth }}
-        <button type="button" data-clipboard-target="#bandwith{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
-      </td> {{-- bandwithExample --}}
+      <td id="capcity{{ $index + $customers->firstItem() }}">{{ $customer->capcity }}
+        <button type="button" data-clipboard-target="#capcity{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
+      </td>
 
       <td id="assignee{{ $index + $customers->firstItem() }}">
         {{ $customer->user->name }}
@@ -87,8 +83,7 @@
         <button type="button" data-clipboard-target="#assignee{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
-      <td id="latitudeLongitude{{ $index + $customers->firstItem() }}">
-        <a href="http://www.google.com/maps/place/{{$customer->latlong}}" target="_blank" rel="noopener noreferrer">{{$customer->latlong}}</a>
+      <td id="latitudeLongitude{{ $index + $customers->firstItem() }}"><a href="{{ url('http://www.google.com/maps/place/' . $customer->latlong) }}" target="_blank" rel="noopener noreferrer">{{$customer->latlong}}</a>
         <button type="button" data-clipboard-target="#latitudeLongitude{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#mapModal{{ $customer->id }}"><ion-icon name="locate-outline"></ion-icon></button>
@@ -147,8 +142,12 @@
                       <ion-icon name="book-outline" class="me-1"></ion-icon>Notes : {{ $backroom->information }}
                       <br>
                       {{-- <button type="button" class="btn btn-primary" data-toggle="popover" title="User Info">Popover with Title</button> --}}
-                      <ion-icon name="image-outline" class="me-1"></ion-icon>Evidence  : <a class="btn btn-info btn-sm rounded-pill" data-toggle="popover" data-img="{{ Storage::url('public/backroomStatuses/'.$backroom->image) }}" title="Evidence" >Show Evidence</a>
-                      <a href="{{ Storage::url('public/backroomStatuses/'.$backroom->image) }}" download class="btn btn-light btn-sm rounded-pill" target="_blank" rel="noopener noreferrer"><ion-icon name="download-outline"></ion-icon></a>
+                      @if ($backroom->image == NULL)
+                        Image : <a class="btn btn-info btn-sm rounded-pill disabled">No Image</a>
+                      @else
+                        Image : <a class="btn btn-info btn-sm rounded-pill" data-toggle="popover" data-img="{{ Storage::url('public/backroomStatuses/'.$backroom->image) }}" title="Evidence" >Show Image</a>
+                        <a href="{{ Storage::url('public/backroomStatuses/'.$backroom->image) }}" download class="btn btn-light btn-sm rounded-pill" target="_blank" rel="noopener noreferrer"><ion-icon name="download-outline"></ion-icon></a>
+                      @endif
                     @endif
                     <hr>
                   @endforeach

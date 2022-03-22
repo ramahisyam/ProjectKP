@@ -23,17 +23,16 @@
 <body>
     <div>
         <header>
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{-- {{ config('app.name', 'Laravel') }} --}}
-                        RWS
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        RWS
+                    </a>
     
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
     
                         <!-- Right Side Of Navbar -->
@@ -51,6 +50,25 @@
                                 </li>
                             @endif
                             @else
+                                @can('backroom')
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <ion-icon name="notifications-outline"></ion-icon>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            @forelse ($user->notifications as $notification)
+                                                <a class="dropdown-item" href="{{ url('/backroom/task?search=' . $notification->data['businessKey']) }}">
+                                                    Terdapat Task baru dari <br>
+                                                    <span class="text-primary">{{ $notification->data['name'] }}</span><br>
+                                                    dengan business key : <span class="text-primary">{{ $notification->data['businessKey'] }}</span>
+                                                </a>
+                                                <hr>
+                                            @empty
+                                                <a class="dropdown-item">Belum ada Task</a>
+                                            @endforelse
+                                        </div>
+                                    </li>
+                                @endcan
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <ion-icon name="person-circle-outline"></ion-icon>
@@ -58,6 +76,14 @@
                                     </a>
     
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        @if (!Auth::user()->hasRole('superAdmin'))
+                                            <a class="dropdown-item" href="{{ route('user.settings.edit') }}">
+                                                Edit Profile
+                                            </a>
+                                            <a class="dropdown-item" href="{{ route('user.settings.changePassword') }}">
+                                                Ubah password
+                                            </a>
+                                        @endif
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -75,8 +101,8 @@
                 </div>
             </nav>
         </header>
-        @include('layouts.partials._alerts')
-        <main class="py-4">
+        <main style="margin-top: 58px" class="py-4">
+            @include('layouts.partials._alerts')
             @yield('content')
         </main>
     
@@ -93,22 +119,6 @@
           console.log(e);
         });
     </script>
-    {{-- @if (Route::has('login'))
-    <script type="text/javascript">
-        var i = 0;
-        $("#dynamic-ar").click(function () {
-            ++i;
-            // $("#witel").append('<tr><td><input type="text" name="addMoreInputFields[' + i +
-            //     '][subject]" placeholder="Enter subject" class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></td></tr>'
-            //     );
-            $("#witel").append('<div id="div" class="row mb-3"><label class="col-sm-2 col-form-label">Witel '+ String.fromCharCode(65 + i) +'</label><div class="col-sm-8"><select name="witelA" class="form-select"><option>-----Pilih Witel-----</option>@foreach ($services as $service)<option value="{{ $service->id }}">{{ $service->name }}</option>@endforeach</select></div><div class="col-sm-2"><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></div></div>');                
-        });
-        $(document).on('click', '.remove-input-field', function () {
-            $(this).parents('#div').remove();
-            --i;
-        });
-    </script>
-    @endif --}}
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}

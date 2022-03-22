@@ -33,8 +33,8 @@ class Backroom extends Model
         return $this->belongsToMany(BackroomStatus::class);
     }
     
-    // public function customerRequests()
-    // {
-    //     return $this->belongsToMany(CustomerRequest::class);
-    // }
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }

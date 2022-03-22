@@ -6,7 +6,7 @@ use App\Models\Backroom;
 use App\Models\BackroomStatus;
 use App\Models\CustomerRequest;
 use App\Events\BackroomNotification;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -32,6 +32,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
+
         $customers = CustomerRequest::sortable()
         ->latest()
         ->filter(request(['search']))
@@ -39,10 +40,12 @@ class HomeController extends Controller
         ->paginate(10);
 
         if ($user->hasRole('AM')) {
-            return view('dashboard', compact('customers'));
-            event(new BackroomNotification('data baru masuk'));
-        } else {
-            return redirect()->route('backroom.index');
+            // return view('customer-request.index', compact('customers', 'user'));
+            return redirect()->route('customer.index');
+        } else if ($user->hasRole('superAdmin')) {
+            return redirect()->route('customer.admin');
+        } else{
+            return redirect()->route('backroomtask.index');
         }
     }
     

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuperServicesTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateSuperServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('super_services', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
-            $table->string('title');
-            $table->text('content');      
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateSuperServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('super_services');
+        Schema::dropIfExists('customers');
     }
 }

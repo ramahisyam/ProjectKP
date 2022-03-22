@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuperUsersTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateSuperUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('super_users', function (Blueprint $table) {
-            $table->id();
-            $table->string('image');
-            $table->string('title');
-            $table->text('content');      
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('type');
+            $table->morphs('notifiable');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateSuperUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('super_users');
+        Schema::dropIfExists('notifications');
     }
 }

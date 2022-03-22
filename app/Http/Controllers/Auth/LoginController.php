@@ -39,10 +39,10 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function authenticated(Request $request, $user)
-    {
-        if ($user->can('backroom')) {
-            return redirect()->route('backroom.index');
-        }
-    }
+    // public function authenticated(Request $request, $user)
+    // {
+    //     if ($user->can('backroom')) {
+    //         return redirect()->route('backroom.index');
+    //     }
+    // }
 }

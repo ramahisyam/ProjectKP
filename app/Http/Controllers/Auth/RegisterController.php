@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Backroom;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -66,20 +67,25 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         
-        return $user = User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phoneNumber' => $data['phoneNumber'],
-        ])->assignRole($data['role'])->givePermissionTo('backroom');
+        ])->assignRole($data['role']);
 
-        dd($user);
+        if ($user->getRoleNames()[0] == 'AM') {
+            return $user->givePermissionTo('accountManager');
+        } else {
+            return $user->givePermissionTo('backroom');
+        }
+        
     }
 
     public function showRegistrationForm()
     {
-        $backrooms = Backroom::all();
+        $roles = Role::where('name', '!=', 'superAdmin')->get();
 
-        return view('auth.register', compact('backrooms'));
+        return view('auth.register', compact('roles'));
     }
 }
