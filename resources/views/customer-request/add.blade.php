@@ -71,7 +71,7 @@
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Kapasitas</label>
                 <div class="col-sm-10">
                   <div class="input-group">
-                    <input name="capcity" type="number" class="form-control @error('capcity') is-invalid @enderror" placeholder="Kapasitas" value="{{ old('capcity') }}">
+                    <input name="capacity" type="number" class="form-control @error('capcity') is-invalid @enderror" placeholder="Kapasitas" value="{{ old('capcity') }}">
                     <span>
                       <select name="unit" class="form-select" id="inputGroupSelect01">
                         <option value="MB">Mbps</option>

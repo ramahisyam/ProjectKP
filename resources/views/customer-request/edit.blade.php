@@ -36,7 +36,7 @@
             
             <div class="col-md-6">
               <label class="p-2">Kapasitas</label>
-              <input class="form-control" id="" value="{{ $customer->capcity }}">
+              <input class="form-control" id="" value="{{ $customer->capacity }}">
               <label class="p-2">Latlong</label>
               <input name="latlong" class="form-control" id="" value="{{ $customer->latlong }}">
               <label class="p-2">Phone Number</label>
