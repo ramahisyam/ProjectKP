@@ -20,7 +20,7 @@ class CreateCustomerRequestsTable extends Migration
             $table->string('phoneNumber');
             $table->string('latlong');
             $table->string('address');
-            $table->string('capcity');
+            $table->string('capacity');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();

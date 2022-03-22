@@ -69,8 +69,8 @@
         <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
-      <td id="capcity{{ $index + $customers->firstItem() }}">{{ $customer->capcity }}
-        <button type="button" data-clipboard-target="#capcity{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
+      <td id="capacity{{ $index + $customers->firstItem() }}">{{ $customer->capacity }}
+        <button type="button" data-clipboard-target="#capacity{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
       <td id="assignee{{ $index + $customers->firstItem() }}">

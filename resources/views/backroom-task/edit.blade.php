@@ -26,7 +26,7 @@
             
             <div class="col-md-6">
               <label class="p-2">Kapasitas</label>
-              <input class="form-control" id="" readonly="" value="{{ $status->customerRequests->capcity }}">
+              <input class="form-control" id="" readonly="" value="{{ $status->customerRequests->capacity }}">
               <label class="p-2">Long Lat</label>
               <input name="longlat" class="form-control" id="" readonly="" value="{{ $status->customerRequests->latlong }}">
               <label class="p-2"><ion-icon name="information-circle-outline" class="me-1"></ion-icon>Status</label>

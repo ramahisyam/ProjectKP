@@ -42,7 +42,7 @@
       <th scope="col">@sortablelink('name', 'Customer')</th>
       <th scope="col">@sortablelink('phoneNumber', 'Phone Number')</th>
       <th scope="col">@sortablelink('service_id', 'Service')</th>
-      <th scope="col">@sortablelink('capcity', 'Kapasitas')</th>
+      <th scope="col">@sortablelink('capacity', 'Capacity')</th>
       <th scope="col">@sortablelink('created_at', 'Created At')</th>
       <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
       <th scope="col">@sortablelink('address', 'Address')</th>
@@ -73,8 +73,8 @@
         <button type="button" data-clipboard-target="#serviceName{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
-      <td id="capcity{{ $index + $customers->firstItem() }}">{{ $customer->capcity }}
-        <button type="button" data-clipboard-target="#capcity{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
+      <td id="capacity{{ $index + $customers->firstItem() }}">{{ $customer->capacity }}
+        <button type="button" data-clipboard-target="#capacity{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
       <td id="assignee{{ $index + $customers->firstItem() }}">

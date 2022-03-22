@@ -12,7 +12,7 @@ class Backroom extends Model
     use HasFactory;
 
     protected $guarded = [];
-    public $sortable = ['business_key', 'name', 'service_id', 'bandwidth', 'created_at', 'updated_at', 'address', 'phoneNumber', 'latlong'];
+    public $sortable = ['business_key', 'name', 'service_id', 'capacity', 'created_at', 'updated_at', 'address', 'phoneNumber', 'latlong'];
 
     public function scopeFilter($query, array $filters){
 
@@ -22,7 +22,7 @@ class Backroom extends Model
                          ->orWhere('created_at', 'like', '%' . $search . '%')
                          ->orWhere('address', 'like', '%' . $search . '%')
                          ->orWhere('business_key', 'like', '%' . $search . '%')
-                         ->orWhere('bandwidth', 'like', '%' . $search . '%')
+                         ->orWhere('capacity', 'like', '%' . $search . '%')
                          ->orWhere('service_id.name', 'like', '%' . $search . '%');
 
         });

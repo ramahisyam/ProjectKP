@@ -28,55 +28,55 @@ class RoleSeeder extends Seeder
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 1',
+                'name' => 'Witel SBU',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 2',
+                'name' => 'Witel SBS',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 3',
+                'name' => 'Witel SDA',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 4',
+                'name' => 'Witel KDR',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 5',
+                'name' => 'Witel JBR',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 6',
+                'name' => 'Witel PSN',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 7',
+                'name' => 'Witel MLG',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 8',
+                'name' => 'Witel MDR',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 9',
+                'name' => 'Witel MDN',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 10',
+                'name' => 'Witel DPS',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 11',
+                'name' => 'Witel SGR',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 12',
+                'name' => 'Witel KPG',
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'Witel 13',
+                'name' => 'Witel MTR',
                 'guard_name' => 'web'
             ],
             [
