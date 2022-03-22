@@ -42,7 +42,7 @@ class CustomerRequestController extends Controller
             'latlong' => ['required', new LocationCoordinates],
             'address' => 'required|max:255',
             'service_id' => 'required|exists:services,id',
-            'bandwidth' => 'required|digits_between:1,3',
+            'capacity' => 'required|digits_between:1,3',
             // 'witel' => [
             //     'required',
             //     Rule::exists('statuses')->where(function ($query) {
@@ -60,7 +60,7 @@ class CustomerRequestController extends Controller
             'latlong' => $request->latlong,
             'address' => $request->address,
             'service_id' => $request->service_id,
-            'bandwidth' => $request->bandwidth . ' ' . $request->unit,
+            'capacity' => $request->capacity . ' ' . $request->unit,
             'user_id' => auth()->user()->id
         ]);
 

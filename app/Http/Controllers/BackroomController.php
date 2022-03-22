@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Backroom;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class BackroomController extends Controller
 {
@@ -24,11 +25,16 @@ class BackroomController extends Controller
             'name' => 'required',
         ]);
 
-        $service = Backroom::create([
+        $backroom = Backroom::create([
             'name' => $request->name,
         ]);
 
-        if ($service) {
+        Role::create([
+            'name' => $request->name,
+            'guard_name' => 'web'
+        ]);
+
+        if ($backroom) {
             return redirect()->route('backroom.index')->with(['success' => 'Data Berhasil Disimpan']);
         }else {
             return redirect()->route('backroom.index')->with(['error' => 'Data Gagal Disimpan']);

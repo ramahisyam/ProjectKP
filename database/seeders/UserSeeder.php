@@ -28,13 +28,13 @@ class UserSeeder extends Seeder
         $mso->givePermissionTo('backroom');
 
         $witel2 = User::create([
-            'name' => 'Witel 2',
-            'email' => 'witel2.telkom@telkom.co.id',
+            'name' => 'Witel SBS',
+            'email' => 'witel.sbs@telkom.co.id',
             'phoneNumber' => '08' . strval($faker->numerify('##########')),
             'password' => bcrypt('123456789'),
         ]);
 
-        $witel2->assignRole('Witel 2');
+        $witel2->assignRole('Witel SBS');
         $witel2->givePermissionTo('backroom');
 
         $am = User::create([
