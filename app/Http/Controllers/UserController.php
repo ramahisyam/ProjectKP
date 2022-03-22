@@ -16,7 +16,9 @@ class UserController extends Controller
     public function index()
     {
         //fungsi eloquent menampilkan data menggunakan pagination
-        $users = User::latest()
+        $users = User::sortable()
+        ->latest()
+        ->filter(request(['search']))
         ->where('name', '!=', 'Admin')
         ->paginate(10);
 

@@ -11,7 +11,9 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::latest()
+        $services = Service::sortable()
+        ->latest()
+        ->filter(request(['search']))
         ->with('backrooms')
         ->paginate(10);
         return view('admin.service.index', compact('services'));

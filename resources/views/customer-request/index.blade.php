@@ -13,7 +13,7 @@
       {{-- start of search form --}}
       <div class="row justify-content-end">
         <div class="col-md-12">
-          <form action="/" method="GET">
+          <form action="/customer" method="GET">
             <div class="input-group mb-3">
               <input name="search" type="text" class="form-control" placeholder="Search here . . ." value="{{request('search')}}">
               <button class="btn btn-outline-primary" type="submit" ><ion-icon name="search-outline"></ion-icon></button>
@@ -85,7 +85,7 @@
 
       <td id="latitudeLongitude{{ $index + $customers->firstItem() }}"><a href="{{ url('http://www.google.com/maps/place/' . $customer->latlong) }}" target="_blank" rel="noopener noreferrer">{{$customer->latlong}}</a>
         <button type="button" data-clipboard-target="#latitudeLongitude{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
-        <!-- Button trigger modal -->
+        {{-- <!-- Button trigger modal -->
         <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#mapModal{{ $customer->id }}"><ion-icon name="locate-outline"></ion-icon></button>
 
         <!-- Modal -->
@@ -104,7 +104,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
 
       </td>
 

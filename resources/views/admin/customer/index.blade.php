@@ -45,7 +45,7 @@
           {{-- start of search form --}}
           <div class="row justify-content-end">
             <div class="col-md-12">
-              <form action="/" method="GET">
+              <form action="/admin/customer" method="GET">
                 <div class="input-group mb-3">
                   <input name="search" type="text" class="form-control" placeholder="Search here . . ." value="{{request('search')}}">
                   <button class="btn btn-outline-primary" type="submit" >Search</button>
