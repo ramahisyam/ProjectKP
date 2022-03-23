@@ -13,10 +13,10 @@
       {{-- start of search form --}}
       <div class="row justify-content-end">
         <div class="col-md-12">
-          <form action="/" method="GET">
+          <form action="/customer" method="GET">
             <div class="input-group mb-3">
               <input name="search" type="text" class="form-control" placeholder="Search here . . ." value="{{request('search')}}">
-              <button class="btn btn-outline-primary" type="submit" >Search</button>
+              <button class="btn btn-outline-primary" type="submit" ><ion-icon name="search-outline"></ion-icon></button>
             </div>
           </form>
         </div>
@@ -46,6 +46,7 @@
       <th scope="col">@sortablelink('created_at', 'Created At')</th>
       <th scope="col">@sortablelink('latlong', 'Latitude, Longitude')</th>
       <th scope="col">@sortablelink('address', 'Address')</th>
+      <th scope="col">@sortablelink('created_at', 'Created At')</th>
       <th scope="col">Action</th>
       {{-- end of column --}}
 
@@ -76,17 +77,45 @@
         <button type="button" data-clipboard-target="#capacity{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
-      <td id="createdAt{{ $index + $customers->firstItem() }}">{{$customer->created_at}}
-        <button type="button" data-clipboard-target="#createdAt{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
+      <td id="assignee{{ $index + $customers->firstItem() }}">
+        {{ $customer->user->name }}
+        <span class="badge rounded-pill bg-light text-dark">{{ $customer->user->phoneNumber }}</span>
+        <button type="button" data-clipboard-target="#assignee{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
 
       <td id="latitudeLongitude{{ $index + $customers->firstItem() }}"><a href="{{ url('http://www.google.com/maps/place/' . $customer->latlong) }}" target="_blank" rel="noopener noreferrer">{{$customer->latlong}}</a>
         <button type="button" data-clipboard-target="#latitudeLongitude{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
+        {{-- <!-- Button trigger modal -->
+        <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#mapModal{{ $customer->id }}"><ion-icon name="locate-outline"></ion-icon></button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="mapModal{{ $customer->id }}" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="mapModalLabel">Map Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAD7NT9H6NnUXf8jN7w0jd4ZnoibDWMy-o&center={{$customer->latlong}}&zoom=18" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div> --}}
+
       </td>
 
       <td id="address{{ $index + $customers->firstItem() }}">{{$customer->address}}
         <button type="button" data-clipboard-target="#address{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
       </td>
+
+      <td id="createdAt{{ $index + $customers->firstItem() }}">{{$customer->created_at}}
+        <button type="button" data-clipboard-target="#createdAt{{ $index + $customers->firstItem() }}" class="btn btn-outline-light btn-sm"><ion-icon name="clipboard-outline"></ion-icon></button>
+      </td>
+
       <td width=200px>
         <div class="flex-parent jc-center">
           <!-- Modal -->
@@ -103,14 +132,14 @@
                     <br>
                     @if ($backroom->customer_request_id == $customer->id)
                       @if ($backroom->name == 'Waiting to Process')
-                        Status  : <span class="badge rounded-pill bg-secondary">{{ $backroom->name }}</span>
+                      <ion-icon name="stats-chart-outline" class="me-1"></ion-icon>Status  : <span class="badge rounded-pill bg-secondary"><ion-icon name="hourglass-outline" class="me-1"></ion-icon>{{ $backroom->name }}</span>
                       @elseif ($backroom->name == 'Not Ready')
-                        Status  : <span class="badge rounded-pill bg-danger">{{ $backroom->name }}</span>
+                      <ion-icon name="stats-chart-outline" class="me-1"></ion-icon>Status  : <span class="badge rounded-pill bg-danger"><ion-icon name="alert-circle-outline" class="me-1"></ion-icon>{{ $backroom->name }}</span>
                       @elseif ($backroom->name == 'Ready')
-                        Status  : <span class="badge rounded-pill bg-success">{{ $backroom->name }}</span>
+                      <ion-icon name="stats-chart-outline" class="me-1"></ion-icon>Status  : <span class="badge rounded-pill bg-success"><ion-icon name="checkmark-done-outline" class="me-1"></ion-icon>{{ $backroom->name }}</span>
                       @endif
                       <br>
-                      Notes : {{ $backroom->information }}
+                      <ion-icon name="book-outline" class="me-1"></ion-icon>Notes : {{ $backroom->information }}
                       <br>
                       {{-- <button type="button" class="btn btn-primary" data-toggle="popover" title="User Info">Popover with Title</button> --}}
                       @if ($backroom->image == NULL)
@@ -140,11 +169,11 @@
           @foreach ($customer->statuses as $backroom)
             @if ($backroom->customer_request_id == $customer->id)
               @if ($backroom->name == 'Waiting to Process')
-                <span class="badge rounded-pill bg-secondary">{{ $backroom->backroom->name }}</span>
+                <span class="badge rounded-pill bg-secondary"><ion-icon name="hourglass-outline" class="me-1"></ion-icon>{{ $backroom->backroom->name }}</span>
               @elseif ($backroom->name == 'Not Ready')
-                <span class="badge rounded-pill bg-danger">{{ $backroom->backroom->name }}</span>
+                <span class="badge rounded-pill bg-danger"><ion-icon name="alert-circle-outline" class="me-1"></ion-icon>{{ $backroom->backroom->name }}</span>
               @elseif ($backroom->name == 'Ready')
-                <span class="badge rounded-pill bg-success">{{ $backroom->backroom->name }}</span>
+                <span class="badge rounded-pill bg-success"><ion-icon name="checkmark-done-outline" class="me-1"></ion-icon>{{ $backroom->backroom->name }}</span>
               @endif
             @endif
           @endforeach

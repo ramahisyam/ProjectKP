@@ -10,7 +10,10 @@ class BackroomController extends Controller
 {
     public function index()
     {
-        $backrooms = Backroom::latest()->paginate(10);
+        $backrooms = Backroom::sortable()
+        ->latest()
+        ->filter(request(['search']))
+        ->paginate(10);
         return view('admin.backroom.index', compact('backrooms'));
     }
     

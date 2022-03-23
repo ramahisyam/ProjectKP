@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5 mb-5 main">
+<div class="container mb-5 ">
     <!-- Sidebar -->
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white position-fixed" aria-haspopup="true" aria-expanded="false" v-pre>
         <div class="position-sticky">
@@ -37,7 +37,7 @@
         </div>
     </nav>
     <!-- Sidebar -->
-    <div class="row justify-content-end">
+    <div class="row justify-content-center main">
         <div class="col-10">
           <br>
           <br>
@@ -51,7 +51,7 @@
               {{-- start of search form --}}
               <div class="row justify-content-end">
                 <div class="col-md-12">
-                  <form action="/" method="GET">
+                  <form action="/backroom" method="GET">
                     <div class="input-group mb-3">
                       <input name="search" type="text" class="form-control" placeholder="Search here . . ." value="{{request('search')}}">
                       <button class="btn btn-outline-primary" type="submit" >Search</button>
@@ -66,8 +66,8 @@
             <thead>
               <tr>
                 <th scope="col">No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Created At</th>
+                <th scope="col">@sortablelink('name', 'Name')</th>
+                <th scope="col">@sortablelink('created_at', 'Created At')</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>

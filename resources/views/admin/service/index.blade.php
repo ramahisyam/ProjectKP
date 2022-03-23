@@ -52,7 +52,7 @@
         {{-- start of search form --}}
         <div class="row justify-content-end">
           <div class="col-md-12">
-            <form action="/" method="GET">
+            <form action="/service" method="GET">
               <div class="input-group mb-3">
                 <input name="search" type="text" class="form-control" placeholder="Search here . . ." value="{{request('search')}}">
                 <button class="btn btn-outline-primary" type="submit" >Search</button>
@@ -67,9 +67,9 @@
       <thead>
         <tr>
           <th scope="col">No.</th>
-          <th scope="col">Name</th>
+          <th scope="col">@sortablelink('name', 'Name')</th>
           <th scope="col">Backroom</th>
-          <th scope="col">Created At</th>
+          <th scope="col">@sortablelink('created_at', 'Created At')</th>
           <th scope="col">Action</th>
         </tr>
       </thead>

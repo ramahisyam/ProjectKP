@@ -18,6 +18,7 @@ class CustomerRequestController extends Controller
 {
     public function index()
     {
+        //dd(request('search'));
         $customers = CustomerRequest::sortable()
         ->latest()
         ->filter(request(['search']))
