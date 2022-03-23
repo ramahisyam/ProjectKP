@@ -33,12 +33,6 @@ class HomeController extends Controller
     {
         $user = auth()->user();
 
-        $customers = CustomerRequest::sortable()
-        ->latest()
-        ->filter(request(['search']))
-        ->with('statuses')
-        ->paginate(10);
-
         if ($user->hasRole('AM')) {
             // return view('customer-request.index', compact('customers', 'user'));
             return redirect()->route('customer.index');

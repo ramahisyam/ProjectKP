@@ -56,7 +56,7 @@
                                             <ion-icon name="notifications-outline"></ion-icon>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            @forelse ($user->notifications as $notification)
+                                            @forelse (auth()->user()->notifications as $notification)
                                                 <a class="dropdown-item" href="{{ url('/backroom/task?search=' . $notification->data['businessKey']) }}">
                                                     Terdapat Task baru dari <br>
                                                     <span class="text-primary">{{ $notification->data['name'] }}</span><br>
