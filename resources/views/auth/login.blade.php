@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="card align-middle">
+            <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
