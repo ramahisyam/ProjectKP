@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end"><ion-icon name="chatbox-outline" class="me-1"></ion-icon>{{ __('Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end"><ion-icon name="at-outline" class="me-1"></ion-icon>{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">Phone Number</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end"><ion-icon name="call-outline" class="me-1"></ion-icon>Phone Number</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="tel" class="form-control @error('phoneNumber') is-invalid @enderror" name="phoneNumber" value="{{ old('phoneNumber') }}" required autocomplete="phoneNumber">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="inputEmail3" class="col-md-4 col-form-label text-md-end">Role</label>
+                            <label for="inputEmail3" class="col-md-4 col-form-label text-md-end"><ion-icon name="body-outline" class="me-1"></ion-icon>Role</label>
                             <div class="col-md-6">
                                 <select name="role" class="form-select @error('role') is-invalid @enderror" aria-label="Default select example">
                                   <option>-----Pilih Role anda-----</option>  
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end"><ion-icon name="lock-closed-outline" class="me-1"></ion-icon>{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -85,7 +85,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end"><ion-icon name="lock-closed-outline" class="me-1"></ion-icon>{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -95,7 +95,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    <ion-icon name="log-in-outline" class="me-2"></ion-icon>{{ __('Register') }}
                                 </button>
                             </div>
                         </div>

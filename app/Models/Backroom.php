@@ -6,24 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
 use App\Models\BackroomStatus;
+use Kyslik\ColumnSortable\Sortable;
+
 
 class Backroom extends Model
 {
     use HasFactory;
+    use Sortable;
+
 
     protected $guarded = [];
-    public $sortable = ['business_key', 'name', 'service_id', 'capacity', 'created_at', 'updated_at', 'address', 'phoneNumber', 'latlong'];
+    public $sortable = ['name', 'created_at'];
 
     public function scopeFilter($query, array $filters){
 
         $query->when($filters['search'] ?? false, function($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%')
-                         ->orWhere('phoneNumber', 'like', '%' . $search . '%')
-                         ->orWhere('created_at', 'like', '%' . $search . '%')
-                         ->orWhere('address', 'like', '%' . $search . '%')
-                         ->orWhere('business_key', 'like', '%' . $search . '%')
-                         ->orWhere('capacity', 'like', '%' . $search . '%')
-                         ->orWhere('service_id.name', 'like', '%' . $search . '%');
+                         ->orWhere('created_at', 'like', '%' . $search . '%');
 
         });
         
