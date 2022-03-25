@@ -79,9 +79,16 @@ Route::group(['middleware' => ['role:superAdmin']], function() {
         return view('admin.customer.index', compact('customers'));
     })->name('customer.admin');
 });
+Route::get('/markAllAsRead', function () {
+    auth()->user()->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('markAllAsRead');
 
-
-
-// Route::get('/test', function() {
-//     return view('super.backrooms.dashboard');
-// });
+Route::get('/markAsRead/{id}', function ($id) {
+    $notification = auth()->user()->notifications()->where('id', $id)->first();
+    if ($notification) {
+        $notification->markAsRead();
+        return redirect('/backroom/task?search=' . $notification->data['businessKey']);
+    }
+    
+})->name('markAsRead');

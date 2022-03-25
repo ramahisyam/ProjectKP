@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="row mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="navigate-outline" class="me-1"></ion-icon>Latlong</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><ion-icon name="navigate-outline" class="me-1"></ion-icon>Latlong (Latitude, Longitude)</label>
                 <div class="col-sm-10">
                   <input name="latlong" type="name" class="form-control @error('latlong') is-invalid @enderror" id="inputEmail3" placeholder="43.xxxxx, -23.xxxxx" value="{{ old('latlong') }}">
                   <span class="text-primary">Ex : 43.1351, -34.1345</span>
