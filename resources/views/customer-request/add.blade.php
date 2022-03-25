@@ -75,7 +75,7 @@
                     <span>
                       <select name="unit" class="form-select" id="inputGroupSelect01">
                         <option value="MB">Mbps</option>
-                        <option value="GB">Rak</option>
+                        <option value="Rak">Rak</option>
                       </select>
                     </span>
                   </div>
