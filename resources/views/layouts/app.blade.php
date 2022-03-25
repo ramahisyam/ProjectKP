@@ -72,7 +72,6 @@
                                             @endforeach
                                             
                                             @foreach (auth()->user()->readNotifications as $notification)
-                                                {{-- <a class="dropdown-item" href="{{ url('/backroom/task?search=' . $notification->data['businessKey']) }}"> --}}
                                                 <a class="dropdown-item" href="{{ url('/backroom/task?search=' . $notification->data['businessKey']) }}">
                                                     Terdapat Task baru dari <br>
                                                     <span class="text-primary">{{ $notification->data['name'] }}</span><br>
