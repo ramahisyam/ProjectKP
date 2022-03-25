@@ -50,25 +50,39 @@
                                 </li>
                             @endif
                             @else
+                                {{-- Notification --}}
                                 @can('backroom')
                                     <li class="nav-item dropdown">
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             <ion-icon name="notifications-outline"></ion-icon>
+                                            @if (auth()->user()->unreadNotifications->count())
+                                                <span class="badge rounded-pill bg-danger">{{ auth()->user()->unreadNotifications->count() }}</span>
+                                            @endif
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            @forelse (auth()->user()->notifications as $notification)
+                                            <a class="dropdown-item text-success" href="{{ route('markAllAsRead') }}">Mark all as Read</a>
+                                            <hr style="margin: 0%;">
+                                            @foreach (auth()->user()->unreadNotifications as $notification)
+                                                <a class="dropdown-item bg-warning bg-opacity-25" href="{{ route('markAsRead', $notification->id) }}">
+                                                    Terdapat Task baru dari <br>
+                                                    <span class="text-primary">{{ $notification->data['name'] }}</span><br>
+                                                    dengan business key : <span class="text-primary">{{ $notification->data['businessKey'] }}</span>
+                                                </a>
+                                                <hr style="margin: 0%;">
+                                            @endforeach
+                                            
+                                            @foreach (auth()->user()->readNotifications as $notification)
                                                 <a class="dropdown-item" href="{{ url('/backroom/task?search=' . $notification->data['businessKey']) }}">
                                                     Terdapat Task baru dari <br>
                                                     <span class="text-primary">{{ $notification->data['name'] }}</span><br>
                                                     dengan business key : <span class="text-primary">{{ $notification->data['businessKey'] }}</span>
                                                 </a>
-                                                <hr>
-                                            @empty
-                                                <a class="dropdown-item">Belum ada Task</a>
-                                            @endforelse
+                                                <hr style="margin: 0%;">
+                                            @endforeach
                                         </div>
                                     </li>
                                 @endcan
+                                
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <ion-icon name="person-circle-outline"></ion-icon>

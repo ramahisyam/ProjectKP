@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\CustomerRequest;
+use App\Observers\BackroomObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
@@ -25,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        CustomerRequest::observe(BackroomObserver::class);
     }
 }

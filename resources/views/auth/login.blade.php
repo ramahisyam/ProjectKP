@@ -12,6 +12,14 @@
             </div>
         </div>
         <div class="col">
+            <div class="card">
+                <div class="card-header">Business Process</div>
+                <div class="card-body">
+                    <img class="img-fluid" src="{{ asset('img/bussinesProcess.png') }}" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+        <div class="col">
             <div class="card align-middle">
                 <div class="card-header">{{ __('Login') }}</div>
 
